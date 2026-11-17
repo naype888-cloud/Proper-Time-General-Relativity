@@ -1,162 +1,204 @@
 <div align="center">
 
-# Proper Time = General Relativity
-### Théorème Canonique d'Unification du Fork Physlib
-#### *Le temps n'est pas un cadre statique : le temps est une horloge locale dont le gradient brise la planitude de Minkowski et engendre la courbure d'Einstein.*
+# Le temps compte les pas
+### Sur la chaîne de tight binding de Physlib, l'espacement `a` se simplifie : un pas dure `1 / (2|t| cos(π/(N+1)))`, `n` pas durent `n` fois plus, et sans pas il n'y a pas de temps
 
-**Eduardo Nava-Hernández & José Arturo Nava-Hernández**  
-*Architecture Formelle Certifiée en Lean 4 (0 `sorry` · Fondements Physlib Tooby-Smith–Diem–Quan–Kevorkian–Ma–Nava)*
+**Eduardo Nava Hernández · José Arturo Nava Hernández**  
+*Dépôt 30 · vérification formelle en Lean 4 · 0 sorry · sur Physlib*
 
 [![Lean 4](https://img.shields.io/badge/Lean_4-v4.35.0-blue.svg?style=flat-square)](https://leanprover.github.io/)
-[![Mathlib](https://img.shields.io/badge/Mathlib-v4.35.0-2ea44f.svg?style=flat-square)](https://github.com/leanprover-community/mathlib4)
-[![Kernel Status](https://img.shields.io/badge/Kernel-0%20sorry%20%7C%20Certifi%C3%A9-brightgreen.svg?style=flat-square)](src/ProperTimeGeneralRelativity.lean)
-[![License: NRS 1.0.0](https://img.shields.io/badge/License-NRS_1.0.0-orange.svg?style=flat-square)](LICENSE)
-[![Repository 30](https://img.shields.io/badge/Repository-30_naype888--cloud-purple.svg?style=flat-square)](https://github.com/naype888-cloud)
+[![Physlib](https://img.shields.io/badge/Physlib-%232096%20fusionn%C3%A9e-8957e5.svg?style=flat-square)](https://github.com/leanprover-community/physlib/pull/2096)
+[![Kernel Status](https://img.shields.io/badge/Kernel-0%20sorry%20%7C%20axiomes%20standard-brightgreen.svg?style=flat-square)](Verification/Axioms.lean)
 
 </div>
 
 ---
 
-> ### 🏛️ Cadre Fondateur : Unification Totale des Piliers du Fork Physlib
+> ### Ce que distingue le théorème
 >
-> **Thèse Fondamentale :** Tous les modules du fork Physlib convergent vers un même nœud déductif. La courbure spatio-temporelle de la Relativité Générale n'est pas un postulat géométrique abstrait : elle découle rigoureusement de l'existence d'un temps propre quantique fini τ_step > 0 engendré par le défaut de Robertson–Schrödinger en dimension 4.
+> Le modèle commence là où il y a de la masse ; ce qui restait à fixer, c'est le temps. Sur la
+> chaîne ouverte, la position est `X = Σ a n |n⟩⟨n|` et le hamiltonien est le saut du graphe
+> chemin, `H = E₀ I − t A(P_N)` (Physlib #2096). L'espacement `a` n'entre que par `X`, donc le
+> courant porte un facteur `a` et aucun état ne dépasse `maxCurrent = 2|a t| cos(π/(N+1))`. Un pas,
+> un espacement à la vitesse limite, dure donc un temps où `a` se simplifie.
 >
-> #### Les Cinq Piliers Déductifs de l'Unification du Fork :
+> <div align="center">
+> <img src="assets/plaque_pas.png" alt="Le temps d'un pas : a sur maxCurrent, où a se simplifie" width="860">
+> </div>
 >
-> * **1. Chaîne Tight-Binding & Annulation de Maille (Tooby-Smith & Nava) :**  
->   La vitesse maximale d'information v_max(t, a, N) sur la chaîne de N sites annule identiquement l'espacement spatial 'a' : a / v_max = τ_step(t, N). L'horloge quantique est invariante d'échelle.
->
-> * **2. Information Quantique & Vitesse de Mandelstam–Tamm (Diem, Quan, Kevorkian) :**  
->   Dans l'espace des états, le ratio de Mandelstam–Tamm sature à l'unité (1 / C² = 1) pour N = 2, 3 (cônes nuls sans masse) et chute strictement sous l'unité pour N ≥ 4. Le coût énergétique ħ / (2 τ_step) coïncide identiquement avec l'énergie de saut hoppingEnergyGap.
->
-> * **3. Rupture de Saturation en Dimension 4 :**  
->   En dimension d = 4, le défaut de masse de Gram est strictement positif : C_M(4) = (94 − 42√5)/5 ≈ 0,017029 > 0, strictement borné par la limite universelle de Szegő π²/3 − 3 > 0.
->
-> * **4. Gravitation Newtonienne par Paires (Qianli Ma dans PhyslibAlpha) :**  
->   La force par paires newtonianGravitationalForce F = G m1 m2 / r² découle de la masse invariante m = scale · √C_M(4), factorisant directement le défaut C_M(4).
->
-> * **5. Brisure de Planitude Métrique & Courbure d'Einstein :**  
->   Le potentiel gravitationnel Φ(r) = −(G m / r) déforme la métrique temporelle : g_00(r) = −(1 − 2Gm/(c²r)) ≠ −1. La planitude de Minkowski est brisée et la connexion de Christoffel Γ^r_00 > 0 impose la Relativité Générale.
+> 1. **`a` se simplifie** : `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))`, le même pour tout espacement.
+> 2. **Le temps compte les pas** : `n` pas durent `n · τ_pas` ; aucun état ne parcourt `n` espacements plus vite ; l'état de courant maximal les parcourt exactement en ce temps.
+> 3. **Sans pas, pas de temps** : `n · τ_pas = 0 ⟺ n = 0`.
+> 4. **Lumière ou masse** : l'état de courant maximal sature Robertson–Schrödinger exactement en `N = 2, 3` ; dès `N = 4` son rapport d'incertitude vérifie `1 < C < √(π²/3 − 2)`.
+> 5. **Einstein** : l'horloge accélérée fixe la température `α/2π` (accélération `α`), et la relation de Clausius sur chaque nappe de lumière, avec `η = 1/(4ℓ²)`, donne `Ric − ½ R g + Λ g = 8π ℓ² T`.
 
 <div align="center">
-
-<img src="assets/plaque_master_proper_time_gr.png" alt="Le Temps Propre Engendre la Relativité Générale : Plaque Maîtresse" width="960">
-
+<img src="assets/plaque_temps_pas_einstein.png" alt="Le temps compte les pas : position, simplification de a, lumière et masse, équation d'Einstein" width="860">
 </div>
 
 ---
 
-## 🏛️ Fascicule des Résultats : Architecture en 5 Étapes Constructives
+## Résumé formel
 
-L'ensemble du traité est établi suivant les principes de déduction stricte de l'analyse spectrale et de l'algèbre des opérateurs autoadjoints : **il n'y a pas un seul gramme de physique postulée ad hoc ; la gravitation en est la conséquence inévitable.**
+**Le pas.** `stepTime T = a / maxCurrent`, et `stepTime_eq` : il vaut `1 / (2|t| cos(π/(N+1)))`.
+Deux chaînes de même `N` et même `t` ont le même pas, quel que soit leur espacement
+(`stepTime_eq_of_eq`) ; il est strictement positif pour `t ≠ 0`, `N ≥ 2` (`stepTime_pos`).
+
+**Le temps de `n` pas.** `elapsed T n = n · stepTime T`. Il est nul exactement quand `n = 0`
+(`elapsed_eq_zero_iff`). Pour tout état de courant non nul, parcourir `n` espacements prend au
+moins `elapsed T n` (`elapsed_le_travelTime`), et l'état de courant maximal le fait exactement
+en ce temps (`elapsed_eq_travelTime_maxCurrentState`).
+
+**Lumière ou masse.** Le défaut de Gram de l'état de courant maximal est nul exactement en
+`N = 2, 3`, et dès `N = 4` le rapport d'incertitude est strictement entre `1` et `√(π²/3 − 2)`.
+Avec ce qui précède : `timeCountsSteps`.
+
+**Horloge accélérée et Einstein.** La ligne d'univers de Rindler d'accélération `α` est paramétrée
+par le temps propre, de période imaginaire minimale `2π/α` et de température `α/2π`
+(`acceleratedClock`). Clausius sur chaque nappe de lumière avec `η = 1/(4ℓ²)`, et `∇f = ½ ∇R`,
+donnent l'équation d'Einstein de couplage `8π ℓ²` (`einstein_eightPi`).
+
+**Clôture.** `properTime_generalRelativity`.
 
 ---
 
-### 📐 Étape 1 : Liaisons Fortes, Courbure de Bande et Annulation de Réseau
-> **Théorème 1.1 (Annulation de maille et temps de pas).** La courbure au fond de bande deriv_deriv_dispersion_zero E''(0) = 2ta² fixe la masse effective. Le temps élémentaire pour franchir la distance 'a' annule la maille 'a' et ne dépend que du couplage 't' et de la taille N :
+## Les étapes
+
+### Étape 1 : l'espacement n'entre que par la position
+
+> **Proposition 1.1 (Physlib).** `X = Σ a n |n⟩⟨n|`, `⟨m|H|n⟩ = E₀ δ_mn − t A(P_N)_mn`,
+> `⟨m|[A, X]|n⟩ = a (n − m) ⟨m|A|n⟩`, et `|⟨J⟩_ω| ≤ maxCurrent = 2|a t| cos(π/(N+1))` pour tout état `ω`.
 
 <div align="center">
-
-<img src="assets/plaque_annulation_reseau.png" alt="Théorème d'annulation de l'échelle de réseau" width="940">
-
+<img src="assets/plaque_etape1_saut.png" alt="Position, saut du graphe chemin, commutateur avec la position, limite de vitesse" width="860">
 </div>
 
-*Module formel :* [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`tau_step_cancels_lattice_spacing`, `tau_step_pos`, `deriv_deriv_dispersion_zero`, `effectiveMass_eq_hbar_sq_div_deriv_deriv`).
+*Modules formels :* Physlib `PhyslibAlpha/CondensedMatter/TightBindingChain` : `Open/Basic.lean` (#2096) et `Current/SpeedLimit.lean`.
 
----
+### Étape 2 : `a` se simplifie, le temps compte les pas
 
-### ⚡ Étape 2 : Information Quantique et Coût de Mandelstam–Tamm
-> **Théorème 2.1 (Équivalence temps-énergie).** Le coût énergétique de transition quantique de Mandelstam–Tamm évalué sur le temps propre τ_step est exactement l'énergie de saut de réseau :
+> **Théorème 2.1.** `τ_pas = a / maxCurrent = 1 / (2|t| cos(π/(N+1)))` ; `t_n = n τ_pas` ;
+> `t_n ≤ n a / |⟨J⟩_ω|` pour tout état de courant non nul ; égalité pour l'état de courant maximal ; `t_n = 0 ⟺ n = 0`.
 
 <div align="center">
-
-<img src="assets/plaque_mandelstam_tamm_hopping.png" alt="Équivalence de Mandelstam-Tamm et de l'énergie de saut" width="940">
-
+<img src="assets/plaque_etape2_pas.png" alt="Le pas sans a, le temps de n pas, borne pour tout état, égalité au courant maximal" width="860">
 </div>
 
-*Module formel :* [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`hopping_energy_gap_eq_mandelstam_tamm`, `mandelstamTammRatio_le_one`).
+*Modules formels :* [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) (`stepTime_eq`, `stepTime_eq_of_eq`, `stepTime_pos`, `elapsed_eq_zero_iff`, `elapsed_le_travelTime`, `elapsed_eq_travelTime_maxCurrentState`).  
+`|a t| = a |t|` car `a > 0`, puis `a / (a · b) = 1 / b`.
 
----
+### Étape 3 : lumière en `N = 2, 3`, masse dès `N = 4`
 
-### 🛡️ Étape 3 : Rupture de Saturation en Dimension 4 et Masse Invariante
-> **Théorème 3.1 (Plancher de Gram C_M(4)).** L'inégalité de Robertson pour les opérateurs de position et de saut sur le cube ouvert à 4 positions impose un défaut strictement positif borné par la limite de Szegő szegoBound :
+> **Proposition 3.1 (Physlib).** L'état de courant maximal sature Robertson–Schrödinger exactement
+> en `N = 2, 3` ; dès `N = 4`, `1 < C < √(π²/3 − 2)`.
 
 <div align="center">
-
-<img src="assets/plaque_axiome_fondateur.png" alt="Identité maîtresse du temps propre et de la courbure" width="940">
-
+<img src="assets/plaque_etape3_lumiere_masse.png" alt="Saturation exactement en N = 2, 3 ; rapport d'incertitude strictement entre 1 et la limite de Szegő" width="860">
 </div>
 
-*Module formel :* [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`C_M_four_pos`, `C_M_four_bounded_by_szego`, `DefectMassModel.mass_pos`).
+*Modules formels :* Physlib `MaxCurrentState/Saturation.lean`, `UncertaintyRatio.lean`, `LongChainMonotonicity.lean` (#1735) ; réunis dans [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) (`timeCountsSteps`).
 
----
+### Étape 4 : l'horloge accélérée
 
-### ⚙️ Étape 4 : Force Newtonienne par Paires dans Physlib (Qianli Ma)
-> **Théorème 4.1 (Interaction gravitationnelle de défaut).** La force gravitationnelle newtonienne par paires newtonianGravitationalForce s'exprime rigoureusement comme le produit des échelles par la constante de masse C_M(4) :
-
-*Module formel :* [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`newtonianGravitationalForce_eq`, `newtonianGravitationalForce_pos`).
-
----
-
-### 👑 Étape 5 : Brisure de Planitude Métrique et Courbure d'Einstein
-> **Théorème 5.1 (Courbure dynamique métrique et connexion non nulle).** La composante métrique temporelle metric_g00 s'écarte strictement de −1 (metric_non_flat). Le symbole de Christoffel christoffel_gamma_r00 est strictement positif : l'espace-temps est dynamiquement courbé.
+> **Proposition 4.1.** La ligne d'univers d'accélération `α > 0` vérifie `ṫ² − ẋ² = 1`,
+> `ẍ² − ẗ² = α²`, a pour plus courte période imaginaire `2π/α`, et `T · 2π/α = 1`.
 
 <div align="center">
-
-<img src="assets/plaque_courbure_einstein.png" alt="Couplage gravitationnel canonique et courbure métrique" width="940">
-
+<img src="assets/plaque_etape4_horloge.png" alt="Ligne d'univers de Rindler, temps propre, accélération, période imaginaire, température d'Unruh" width="860">
 </div>
 
-*Module formel :* [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`metric_g00_deviation`, `metric_non_flat`, `christoffel_gamma_r00_pos`, `gravitationalCoupling_canonical`, `gravitationalCoupling_pos`, `GrandMasterUnificationTheorem`).
+*Modules formels :* [`Unruh.lean`](src/ProperTimeGeneralRelativity/Gravity/Unruh.lean) (`velocity_norm`, `acceleration_norm`, `periodic_two_pi`, `period_ge`, `unruhTemperature_mul_period`) ;
+[`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`acceleratedClock`).  
+Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien avec l'espacement de la chaîne.
+
+### Étape 5 : Clausius sur chaque nappe de lumière donne Einstein
+
+> **Théorème 5.1.** Avec `η = 1/(4ℓ²)`, si `δQ = T δS` vaut sur chaque nappe de lumière par chaque
+> point et si `∇f = ½ ∇R`, il existe `Λ` constante avec `Ric − ½ R g + Λ g = 8π ℓ² T`.
+
+<div align="center">
+<img src="assets/plaque_etape5_einstein.png" alt="Clausius avec η = 1/(4ℓ²) donne R_kk = 8πℓ² T_kk, puis l'équation d'Einstein" width="860">
+</div>
+
+*Modules formels :* [`Clausius.lean`](src/ProperTimeGeneralRelativity/Gravity/Clausius.lean) (`clausius_iff`, `eight_pi`) ;
+[`EinsteinEquation.lean`](src/ProperTimeGeneralRelativity/Gravity/EinsteinEquation.lean) (`einstein_equation`) ;
+[`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`einstein_eightPi`, `properTime_generalRelativity`).  
+`Ric − κ T` s'annule sur le cône de lumière, donc c'est `f g` ; la trace donne `R`, et `R/2 − f` est constante.
 
 ---
 
-## 🏛️ Tableau des Déclarations Certifiées en Lean 4
+## Physlib : pull requests fusionnées
 
-| Déclaration Formelle | Type Mathématique | Fondement Algébrique | Statut Kernel |
-| :--- | :--- | :--- | :---: |
-| `deriv_deriv_dispersion_zero` | `E''(0) = 2 t a²` | Courbure de Bande Tight-Binding | **`0 sorry`** |
-| `effectiveMass_eq_hbar_sq_div_deriv_deriv` | `m* = ħ² / E''(0)` | Masse Effective Mainstream | **`0 sorry`** |
-| `tau_step_cancels_lattice_spacing` | `a / maxCurrent t a N = tau_step t N` | Vitesse de Lieb–Robinson (Tooby-Smith) | **`0 sorry`** |
-| `tau_step_pos` | `0 < tau_step t N` | Écoulement du Temps Propre | **`0 sorry`** |
-| `mandelstamTammRatio_le_one` | `mandelstamTammRatio ≤ 1` | Information Quantique (Diem, Quan) | **`0 sorry`** |
-| `hopping_energy_gap_eq_mandelstam_tamm` | `MandelstamTammEnergyCost = hoppingEnergyGap` | Incertitude Temps-Énergie | **`0 sorry`** |
-| `C_M_four_pos` | `0 < C_M_four` | Matrices de Gram de Robertson | **`0 sorry`** |
-| `C_M_four_bounded_by_szego` | `C_M_four < szegoBound` | Monotonie de Szegő (π > 3) | **`0 sorry`** |
-| `DefectMassModel.mass_pos` | `0 < M.mass` | Péage de Masse Invariante | **`0 sorry`** |
-| `newtonianGravitationalForce_eq` | `F = G (scale₁ scale₂ C_M(4)) / r²` | Gravitation Physlib (Qianli Ma) | **`0 sorry`** |
-| `newtonianGravitationalForce_pos` | `0 < newtonianGravitationalForce G M₁ M₂ r` | Attraction Universelle | **`0 sorry`** |
-| `gravitationalCoupling_canonical` | `α_G = scale² * C_M(4) / M_P²` | Échelle de Planck | **`0 sorry`** |
-| `metric_g00_deviation` | `g_00 = -1 + 2 G m / (c² r)` | Potentiel Métrique en Champ Faible | **`0 sorry`** |
-| `metric_non_flat` | `metric_g00 G c M r ≠ -1` | Brisure de Planitude de Minkowski | **`0 sorry`** |
-| `christoffel_gamma_r00_pos` | `0 < christoffel_gamma_r00 G c M r` | Symbole de Christoffel / Courbure | **`0 sorry`** |
-| **`GrandMasterUnificationTheorem`** | **Synthèse Totale d'Unification du Fork** | **Tooby-Smith · Diem · Ma · Einstein** | **`0 sorry`** |
+| PR | Énoncé | Étape |
+|---|---|---|
+| [#2096](https://github.com/leanprover-community/physlib/pull/2096) | la chaîne ouverte est le saut du graphe chemin : `H = E₀ I − t A(P_N)` | 1 |
+| [#1734](https://github.com/leanprover-community/physlib/pull/1734) | `C → √(π²/3 − 2)` pour les longues chaînes | 3 |
+| [#1735](https://github.com/leanprover-community/physlib/pull/1735) | `C` strictement croissant dès quatre sites, `C < √(π²/3 − 2)` | 3 |
 
 ---
 
-## 🏛️ Démonstration dans le Noyau Lean 4
+## Catalogue des modules Lean
 
-```lean
-import ProperTimeGeneralRelativity
+| Module | Déclaration | Signification | Statut |
+|---|---|---|---|
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `stepTime_eq` | `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))` | 0 sorry |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `elapsed_eq_zero_iff` | sans pas, pas de temps | 0 sorry |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `elapsed_le_travelTime` | aucun état plus rapide que les pas | 0 sorry |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `timeCountsSteps` | le temps compte les pas ; lumière ou masse | 0 sorry |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `acceleratedClock` | temps propre, période `2π/α`, `T = α/2π` | 0 sorry |
+| [`EinsteinEquation.lean`](src/ProperTimeGeneralRelativity/Gravity/EinsteinEquation.lean) | `einstein_equation` | Clausius partout donne Einstein | 0 sorry |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `einstein_eightPi` | Einstein avec couplage `8π ℓ²` | 0 sorry |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `properTime_generalRelativity` | les étapes réunies | 0 sorry |
 
-open ProperTimeGeneralRelativity
+`Unruh.lean`, `Clausius.lean`, `NullForms.lean` et `EinsteinEquation.lean` viennent de
+[`nrs3-tritoro`](https://github.com/naype888-cloud/nrs3-tritoro) (`NRS3Tritoro/Gravity`), copiés
+sans modification sauf le chemin des imports.
 
-#print axioms GrandMasterUnificationTheorem
--- 'ProperTimeGeneralRelativity.GrandMasterUnificationTheorem' depends on axioms:
--- [propext, Classical.choice, Quot.sound]
+---
+
+## Compilation et certification du noyau
+
+Lean 4 `v4.35.0`. Seule dépendance : Physlib, au commit de fusion de #2096.
+
+```bash
+lake exe cache get
+lake build
+lake env lean Verification/Axioms.lean
+# 'ProperTimeGR.properTime_generalRelativity' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
-Compilé et certifié sous les seuls axiomes primitifs ZFC standard de Lean 4. Zéro axiome ad hoc. Zéro conjecture.
+0 sorry, aucun axiome ad hoc, `autoImplicit = false`.
+
+---
+
+## Chronologie
+
+| Année | Événement | Dépôt associé |
+|---|---|---|
+| 1915 | Einstein : les équations du champ | **ce dépôt** |
+| **1929–30** | **Robertson et Schrödinger : l'inégalité d'incertitude** | [dépôt de base](https://github.com/naype888-cloud/nava-robertson-schrodinger) |
+| 1976 | Unruh : la température de l'observateur accéléré | **ce dépôt** |
+| 1995 | Jacobson : l'équation d'Einstein depuis la relation de Clausius | **ce dépôt** · [`nrs3-tritoro`](https://github.com/naype888-cloud/nrs3-tritoro) |
+
+---
+
+## La mosaïque des dépôts RS^N³
+
+- [RS^N et RS^N³ — Le théorème de base](https://github.com/naype888-cloud/nava-robertson-schrodinger)
+- [RS^N³ · Tritoro](https://github.com/naype888-cloud/nrs3-tritoro)
+- [RS^N³ · Mandelstam–Tamm et Cramér–Rao](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao)
+- [RS^N³ · Bekenstein — Bits on the Boundary](https://github.com/naype888-cloud/nrs3-bekenstein)
+- [La chaîne close](https://github.com/naype888-cloud/Anti-Kurt-Godel-Theorem)
+- **[Le temps compte les pas](https://github.com/naype888-cloud/Proper-Time-General-Relativity)** (ce dépôt)
 
 ---
 
 <div align="center">
 
-### *« Le temps n'est pas une scène où les corps se déplacent : le temps est une horloge locale propre.  
-Parce que chaque horloge bat à son rythme sous son propre défaut de masse, la métrique se courbe :  
-la Relativité est irréductiblement Générale. »*
-
-**Eduardo Nava-Hernández & José Arturo Nava-Hernández**  
-*Fondateurs du Programme NRS³ · naype888-cloud*
+*L'espacement se simplifie ; il reste les pas, et sans pas il n'y a pas de temps.*
 
 </div>
+
+## Licence
+
+NRS Noncommercial License 1.0.0, voir [`LICENSE`](LICENSE).
