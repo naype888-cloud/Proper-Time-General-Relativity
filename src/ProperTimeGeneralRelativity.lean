@@ -6,6 +6,9 @@ Authors: Eduardo Nava-Hernandez, José Arturo Nava-Hernández
 module
 
 public import ProperTimeGeneralRelativity.StepTime
+public import ProperTimeGeneralRelativity.Niven
+public import ProperTimeGeneralRelativity.Mass
+public import ProperTimeGeneralRelativity.Equivalence
 public import ProperTimeGeneralRelativity.Gravity.EinsteinEquation
 
 /-!
@@ -30,6 +33,9 @@ public import ProperTimeGeneralRelativity.Gravity.EinsteinEquation
 - `ProperTimeGR.acceleratedClock` : proper time, acceleration `a`, period `2π / a`, `T = a / 2π`.
 - `ProperTimeGR.einstein_eightPi` : the Einstein equation with coupling `8π ℓ²`.
 - `ProperTimeGR.properTime_generalRelativity` : the three together.
+- `ProperTimeGR.massAndEquivalence` : Niven on the step, the effective mass with `a` cancelled
+  in `m* c²`, `α_G > 0`, and the weak field of a mass agreeing to first order with the
+  accelerated frame (`Niven`, `Mass`, `Equivalence`).
 -/
 
 @[expose] public noncomputable section
@@ -100,5 +106,19 @@ theorem properTime_generalRelativity (C : TightBindingChain) (htC : C.t ≠ 0) (
   ⟨⟨stepTime_eq C, elapsed_eq_zero_iff C htC hNC⟩,
     (acceleratedClock ha).2.2.2.2,
     einstein_eightPi hRic hT hℓ hκ hA hl hC hf hR hBianchi⟩
+
+/-- **Mass and equivalence.** From `N = 3` on the step is irrational in units of `1 / |t|`
+(Niven); the effective mass of the band has rest energy `m* c² = 2 t cos² (π / (N + 1))`, without
+the spacing; `α_G = G m*² / c > 0`; and at `r₀ ≠ 0` the weak field of a mass `M` has the slope of
+`g₀₀` of the frame accelerated with `G M / r₀²`. -/
+theorem massAndEquivalence (C : TightBindingChain) (htC : 0 < C.t) (hNC : 3 ≤ C.N)
+    {G M r₀ : ℝ} (hG : 0 < G) (hr : r₀ ≠ 0) :
+    (¬ ∃ q : ℚ, 2 * |C.t| * stepTime C = q) ∧
+    effMass C * C.maxCurrent ^ 2 = 2 * C.t * Real.cos (π / (C.N + 1)) ^ 2 ∧
+    0 < gravitationalCoupling C G ∧
+    (HasDerivAt (fun r => -(1 + 2 * Frame.newtonPotential G M r)) (-2 * (G * M / r₀ ^ 2)) r₀ ∧
+      HasDerivAt (Frame.g00 (G * M / r₀ ^ 2)) (-2 * (G * M / r₀ ^ 2)) 0) :=
+  ⟨stepTime_irrational C htC.ne' hNC, effMass_mul_maxCurrent_sq C htC,
+    gravitationalCoupling_pos C hG htC (by omega), Frame.equivalence G M hr⟩
 
 end ProperTimeGR

@@ -64,16 +64,19 @@ theorem stepTime_eq_of_eq (T' : TightBindingChain) (hN : T.N = T'.N) (ht : T.t =
     stepTime T = stepTime T' := by
   rw [stepTime_eq, stepTime_eq, hN, ht]
 
+/-- `cos (π / (N + 1)) > 0` for `N ≥ 2`. -/
+theorem cos_pi_div_succ_pos {N : ℕ} (hN : 2 ≤ N) : 0 < Real.cos (Real.pi / (N + 1)) := by
+  have hN' : (3 : ℝ) ≤ N + 1 := by
+    have : (2 : ℝ) ≤ N := by exact_mod_cast hN
+    linarith
+  have h1 : 0 < Real.pi / (N + 1) := by positivity
+  have h2 : Real.pi / (N + 1) < Real.pi / 2 :=
+    div_lt_div_of_pos_left Real.pi_pos (by norm_num) (by linarith)
+  exact Real.cos_pos_of_mem_Ioo ⟨by linarith [Real.pi_pos], h2⟩
+
 theorem stepTime_pos (ht : T.t ≠ 0) (hN : 2 ≤ T.N) : 0 < stepTime T := by
   rw [stepTime_eq]
-  have hN' : (3 : ℝ) ≤ T.N + 1 := by
-    have : (2 : ℝ) ≤ T.N := by exact_mod_cast hN
-    linarith
-  have h1 : 0 < Real.pi / (T.N + 1) := by positivity
-  have h2 : Real.pi / (T.N + 1) < Real.pi / 2 :=
-    div_lt_div_of_pos_left Real.pi_pos (by norm_num) (by linarith)
-  have hc : 0 < Real.cos (Real.pi / (T.N + 1)) :=
-    Real.cos_pos_of_mem_Ioo ⟨by linarith [Real.pi_pos], h2⟩
+  have hc := cos_pi_div_succ_pos hN
   have := abs_pos.mpr ht
   positivity
 
