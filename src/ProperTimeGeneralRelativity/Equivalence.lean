@@ -19,8 +19,9 @@ Minkowski interval in these coordinates is `−(1 + α ξ)² dη² + dξ²`, so
 `g₀₀ = −(1 + 2Φ/c²)`, and a static clock at height `ξ` runs at `1 + α ξ`.
 
 The Newtonian potential `Φ(r) = −G M / r` has slope `G M / r₀²` at `r₀`. So the weak field
-`−(1 + 2Φ)` and the accelerated frame with `α = G M / r₀²` have the same `g₀₀` and the same first
-derivative there: locally, the field of the mass is the accelerated frame.
+`−(1 + 2Φ)` at `r₀` and the accelerated frame with `α = G M / r₀²` at `ξ = 0` have the same slope
+of `g₀₀`: to first order, the field of the mass is the accelerated frame. Their values differ by
+the constant `2 G M / r₀`, the choice of the clock at `ξ = 0`.
 
 ## Main results
 

@@ -8,14 +8,14 @@ module
 public import ProperTimeGeneralRelativity.StepTime
 
 /-!
-# The effective mass of the band, without a free scale
+# The effective mass of the band, and a rest energy without the spacing
 
 The band of the chain is `E(k) = E₀ − 2 t cos (k a)`, the formula of Physlib's
 `TightBindingChain.energyEigenvalue`. Its curvature at `k = 0` is `E''(0) = 2 t a²`, and the
 effective mass is `m* = 1 / E''(0)` (`ħ = 1`). With the speed limit `c = maxCurrent` as the speed
 of the chain, the spacing cancels again in the rest energy: `m* c² = 2 t cos² (π / (N + 1))`, and
-`m* c² τ_pas = cos (π / (N + 1))`. The gravitational coupling `α_G = G m*² / c` has no free
-parameter besides `G`.
+`m* c² τ_pas = cos (π / (N + 1))`. The mass `m*` itself keeps `a`, and so does the
+gravitational coupling `α_G = G m*² / c`, which is positive.
 
 ## Main results
 
