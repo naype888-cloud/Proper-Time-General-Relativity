@@ -8,3 +8,6 @@ import ProperTimeGeneralRelativity
 #print axioms ProperTimeGR.restEnergy_mul_stepTime
 #print axioms ProperTimeGR.openCubeNRS3
 #print axioms ProperTimeGR.fork_unification
+#print axioms ProperTimeGR.tendsto_uncertaintyRatio_longChain
+#print axioms ProperTimeGR.Cube.pairs_commute_iff
+#print axioms ProperTimeGR.Cube.mandelstamTamm_efficiency

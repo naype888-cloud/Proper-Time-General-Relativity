@@ -8,6 +8,7 @@ module
 public import PhyslibAlpha.CondensedMatter.TightBindingChain.Current.SpeedLimit
 public import PhyslibAlpha.CondensedMatter.TightBindingChain.MaxCurrentState.Saturation
 public import PhyslibAlpha.CondensedMatter.TightBindingChain.MaxCurrentState.LongChainMonotonicity
+public import PhyslibAlpha.CondensedMatter.TightBindingChain.MaxCurrentState.LongChainLimit
 public import PhyslibAlpha.CondensedMatter.TightBindingChain.Open.Basic
 
 /-!
@@ -34,6 +35,11 @@ time.
   `n` steps.
 - `ProperTimeGR.timeCountsSteps` : the above, with the light–mass split of the maximal current
   state (`N = 2, 3` against `N ≥ 4`) and its uncertainty ratio `1 < C < √(π²/3 − 2)`.
+- `ProperTimeGR.tendsto_uncertaintyRatio_longChain` : `C → √(π²/3 − 2)` when `N → ∞`.
+
+The Physlib results used are the speed limit (#1724), the saturation at `N = 2, 3` (#1718),
+`1 < C` from `N = 4` on (#1723), `C < √(π²/3 − 2)` (#1735) and its limit (#1734), on the open
+chain of #2096. Their present names come from #1792.
 -/
 
 @[expose] public noncomputable section
@@ -132,5 +138,13 @@ theorem timeCountsSteps (ht : T.t ≠ 0) (hN : 2 ≤ T.N) :
     T.centeredGramDefect_maxCurrentState_eq_zero_iff ht hN,
     fun h4 => ⟨T.one_lt_uncertaintyRatio ht h4,
       T.uncertaintyRatio_lt_sqrt_pi_sq_div_three_sub_two ht h4⟩⟩
+
+/-- **Long chains** (Physlib #1734). Along chains with `t ≠ 0` and `N → ∞`, the uncertainty
+ratio of the maximal current state tends to `√(π²/3 − 2)`. -/
+theorem tendsto_uncertaintyRatio_longChain {ι : Type*} {l : Filter ι}
+    (T : ι → TightBindingChain) (ht : ∀ i, (T i).t ≠ 0)
+    (hN : Filter.Tendsto (fun i => (T i).N) l Filter.atTop) :
+    Filter.Tendsto (fun i => (T i).uncertaintyRatio) l (nhds √(Real.pi ^ 2 / 3 - 2)) :=
+  TightBindingChain.tendsto_uncertaintyRatio T ht hN
 
 end ProperTimeGR
