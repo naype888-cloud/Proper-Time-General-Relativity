@@ -34,6 +34,7 @@
 > 6. **Masse effective** : la masse effective de la bande, `m* = 1/E''(0) = 1/(2 t a²)`, a une énergie au repos `m* c² = 2 t cos²(π/(N+1))` où `a` se simplifie encore ; `α_G = G m*²/c > 0`.
 > 7. **Équivalence et `g₀₀`** : dans le référentiel accéléré, `g₀₀ = −(1 + αξ)² = −(1 + 2Φ) − Φ²` avec `Φ = αξ`, et une horloge statique bat à `1 + αξ` ; le champ faible de `Φ = −GM/r` a, en `r₀`, la même pente de `g₀₀` que le référentiel d'accélération `GM/r₀²`.
 > 8. **Einstein** : l'horloge accélérée fixe la température `α/2π`, et la relation de Clausius sur chaque nappe de lumière, avec `η = 1/(4ℓ²)`, donne `Ric − ½ R g + Λ g = 8π ℓ² T`.
+> 9. **Le cube ouvert NRS³** : sur le produit de trois chaînes, les axes distincts commutent ; dès `4 × 4 × 4`, le quantum volumétrique est strictement positif (`𝒱 > 0`) et Robertson 1934 est strict pour les six observables (`|det Ω| < det Σ`) ; le rapport de Mandelstam–Tamm vaut `1/C²` sur chaque axe. Les étapes sont réunies dans `fork_unification`.
 
 <div align="center">
 <img src="assets/plaque_temps_pas_einstein.png" alt="Le temps compte les pas : position, simplification de a, lumière et masse, équation d'Einstein" width="860">
@@ -77,7 +78,15 @@ par le temps propre, de période imaginaire minimale `2π/α` et de température
 (`acceleratedClock`). Clausius sur chaque nappe de lumière avec `η = 1/(4ℓ²)`, et `∇f = ½ ∇R`,
 donnent l'équation d'Einstein de couplage `8π ℓ²` (`einstein_eightPi`).
 
-**Clôture.** `properTime_generalRelativity`.
+**Le cube ouvert NRS³.** Sur le cube `Tx × Ty × Tz`, les
+observables d'axes distincts commutent (`Cube.axes_commute`), Robertson 1934 s'applique aux six
+observables (`Cube.robertson_det`), le rapport des déterminants vérifie `det Σ = (C_x C_y C_z)² |det Ω|`
+(`Cube.det_cov_maxCurrentCubeState`) et devient strict dès `4 × 4 × 4` (`Cube.robertson_det_strict`).
+Le quantum volumétrique est strictement positif (`Cube.volQuantum_pos`) et l'efficacité de
+Mandelstam–Tamm vaut `1/C_x²` (`Cube.mandelstamTamm_efficiency`). Réunis : `openCubeNRS3` et
+`fork_unification`.
+
+**Clôture.** `properTime_generalRelativity` et `fork_unification`.
 
 ---
 
@@ -182,6 +191,17 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`einstein_eightPi`, `properTime_generalRelativity`).  
 `Ric − κ T` s'annule sur le cône de lumière, donc c'est `f g` ; la trace donne `R`, et `R/2 − f` est constante.
 
+### Étape 9 : le cube ouvert NRS³
+
+> **Proposition 9.1 (Physlib).** Les observables d'axes distincts commutent ; dans l'état de courant maximal du cube, `det Σ = (C_x C_y C_z)² |det Ω|` ; dès `4 × 4 × 4`, `𝒱 = δ(Nx) δ(Ny) δ(Nz) > 0` et `|det Ω| < det Σ` ; sur chaque axe, `⟨J⟩² / (4 Var H Var X) = 1/C²`.
+
+<div align="center">
+<img src="assets/plaque_etape9_cube.png" alt="Axes distincts qui commutent, déterminant de Robertson 1934, quantum volumétrique, rapport de Mandelstam–Tamm" width="860">
+</div>
+
+*Modules formels :* [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) (`Cube.axes_commute`, `Cube.robertson_det`, `Cube.det_cov_maxCurrentCubeState`, `Cube.robertson_det_strict`, `Cube.volQuantum_pos`, `Cube.mandelstamTamm_efficiency`) ;
+[`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`openCubeNRS3`, `fork_unification`).
+
 ---
 
 ## Physlib : pull requests fusionnées
@@ -189,8 +209,12 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 | PR | Énoncé | Étape |
 |---|---|---|
 | [#2096](https://github.com/leanprover-community/physlib/pull/2096) | la chaîne ouverte est le saut du graphe chemin : `H = E₀ I − t A(P_N)` | 1 |
+| [#1725](https://github.com/leanprover-community/physlib/pull/1725) | le cube ouvert NRS³ : trois axes commutants et constante C par axe | 9 |
 | [#1734](https://github.com/leanprover-community/physlib/pull/1734) | `C → √(π²/3 − 2)` pour les longues chaînes | 4 |
 | [#1735](https://github.com/leanprover-community/physlib/pull/1735) | `C` strictement croissant dès quatre sites, `C < √(π²/3 − 2)` | 4 |
+| [#1739](https://github.com/leanprover-community/physlib/pull/1739) | Mandelstam–Tamm et Cramér–Rao sur chaque axe : rapport `1/C²` | 9 |
+| [#1756](https://github.com/leanprover-community/physlib/pull/1756) | angle NRS et quantum volumétrique strictement positif | 9 |
+| [#1986](https://github.com/leanprover-community/physlib/pull/1986) | deux observables du cube commutent si et seulement si elles sont sur des axes distincts | 9 |
 
 ---
 
@@ -207,7 +231,15 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 | [`Mass.lean`](src/ProperTimeGeneralRelativity/Mass.lean) | `gravitationalCoupling_pos` | `α_G = G m*²/c > 0` | 0 sorry |
 | [`Equivalence.lean`](src/ProperTimeGeneralRelativity/Equivalence.lean) | `metric` | `−(1 + αξ)² dη² + dξ²` | 0 sorry |
 | [`Equivalence.lean`](src/ProperTimeGeneralRelativity/Equivalence.lean) | `equivalence` | champ faible de `M` = référentiel accéléré au premier ordre | 0 sorry |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `axes_commute` | commutation des observables entre axes distincts | 0 sorry |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `robertson_det` | Robertson 1934 sur les six observables du cube | 0 sorry |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `det_cov_maxCurrentCubeState` | `det Σ = (C_x C_y C_z)² |det Ω|` | 0 sorry |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `robertson_det_strict` | `|det Ω| < det Σ` dès `4 × 4 × 4` | 0 sorry |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `volQuantum_pos` | quantum volumétrique `𝒱 > 0` | 0 sorry |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `mandelstamTamm_efficiency` | efficacité `1/C_x²` sur chaque axe | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `massAndEquivalence` | Niven, masse, `α_G`, équivalence | 0 sorry |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `openCubeNRS3` | le cube ouvert NRS³ à trois axes | 0 sorry |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `fork_unification` | le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein réunis | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `acceleratedClock` | temps propre, période `2π/α`, `T = α/2π` | 0 sorry |
 | [`EinsteinEquation.lean`](src/ProperTimeGeneralRelativity/Gravity/EinsteinEquation.lean) | `einstein_equation` | Clausius partout donne Einstein | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `einstein_eightPi` | Einstein avec couplage `8π ℓ²` | 0 sorry |
@@ -240,6 +272,8 @@ lake env lean Verification/Axioms.lean
 |---|---|---|
 | 1915 | Einstein : les équations du champ | **ce dépôt** |
 | **1929–30** | **Robertson et Schrödinger : l'inégalité d'incertitude** | [dépôt de base](https://github.com/naype888-cloud/nava-robertson-schrodinger) |
+| 1934 | Robertson : la relation du déterminant pour plusieurs observables | [dépôt de base](https://github.com/naype888-cloud/nava-robertson-schrodinger) |
+| 1945 | Mandelstam et Tamm : la relation temps–énergie | [`nrs3-mandelstam-tamm-cramer-rao`](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao) |
 | 1976 | Unruh : la température de l'observateur accéléré | **ce dépôt** |
 | 1995 | Jacobson : l'équation d'Einstein depuis la relation de Clausius | **ce dépôt** · [`nrs3-tritoro`](https://github.com/naype888-cloud/nrs3-tritoro) |
 

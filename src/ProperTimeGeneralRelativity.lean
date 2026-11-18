@@ -9,6 +9,7 @@ public import ProperTimeGeneralRelativity.StepTime
 public import ProperTimeGeneralRelativity.Niven
 public import ProperTimeGeneralRelativity.Mass
 public import ProperTimeGeneralRelativity.Equivalence
+public import ProperTimeGeneralRelativity.Cube
 public import ProperTimeGeneralRelativity.Gravity.EinsteinEquation
 
 /-!
@@ -19,10 +20,14 @@ public import ProperTimeGeneralRelativity.Gravity.EinsteinEquation
    lasts `1 / (2 |t| cos (π / (N + 1)))` whatever `a` is. `n` steps take `n` step times, no state
    is faster, and no step means no time. The maximal current state is light at `N = 2, 3` and
    massive from `N = 4` on, with uncertainty ratio `1 < C < √(π²/3 − 2)`.
-2. **The accelerated clock** (`Gravity.Unruh`). The Rindler worldline of acceleration `a` is
+2. **The Open Cube NRS³** (`Cube`). On the three-dimensional open tight-binding cube `Tx × Ty × Tz`,
+   the three spatial axes commute, the volumetric quantum `𝒱 = δ(Nx) δ(Ny) δ(Nz)` is strictly
+   positive for `N ≥ 4`, Robertson's determinant relation is strict, and the Mandelstam–Tamm
+   ratio along each axis is `1 / C²`.
+3. **The accelerated clock** (`Gravity.Unruh`). The Rindler worldline of acceleration `a` is
    parametrized by its proper time, its acceleration is `a`, its shortest imaginary period is
    `2π / a`, and the Unruh temperature `a / 2π` is the inverse of that period.
-3. **The Einstein equation** (`Gravity.EinsteinEquation`). If the Clausius relation with the
+4. **The Einstein equation** (`Gravity.EinsteinEquation`). If the Clausius relation with the
    entropy per unit area `η = 1 / (4 ℓ²)` holds on every light sheet through every point, and
    `∇ f = ½ ∇ R` (the contracted Bianchi identity with the conservation of `T`), then
    `Ric − ½ R g + Λ g = 8π ℓ² T` for a constant `Λ`.
@@ -30,12 +35,16 @@ public import ProperTimeGeneralRelativity.Gravity.EinsteinEquation
 ## Main results
 
 - `ProperTimeGR.timeCountsSteps` : the spacing cancels and time counts steps.
+- `ProperTimeGR.openCubeNRS3` : the open cube, volumetric quantum, strict Robertson 1934 and the
+  Mandelstam–Tamm ratio `1 / C_x²`.
 - `ProperTimeGR.acceleratedClock` : proper time, acceleration `a`, period `2π / a`, `T = a / 2π`.
 - `ProperTimeGR.einstein_eightPi` : the Einstein equation with coupling `8π ℓ²`.
 - `ProperTimeGR.properTime_generalRelativity` : the three together.
 - `ProperTimeGR.massAndEquivalence` : Niven on the step, the effective mass with `a` cancelled
   in `m* c²`, `α_G > 0`, and the weak field of a mass agreeing to first order with the
   accelerated frame (`Niven`, `Mass`, `Equivalence`).
+- `ProperTimeGR.fork_unification` : the step time, the rest energy, the open cube, the
+  equivalence of `g₀₀`, the Unruh temperature and the Einstein equation in one statement.
 -/
 
 @[expose] public noncomputable section
@@ -44,6 +53,7 @@ open Real
 open Lorentz Vector
 open LinearMap (BilinForm)
 open CondensedMatter
+open CondensedMatter.TightBindingChain
 
 namespace ProperTimeGR
 
@@ -120,5 +130,64 @@ theorem massAndEquivalence (C : TightBindingChain) (htC : 0 < C.t) (hNC : 3 ≤ 
       HasDerivAt (Frame.g00 (G * M / r₀ ^ 2)) (-2 * (G * M / r₀ ^ 2)) 0) :=
   ⟨stepTime_irrational C htC.ne' hNC, effMass_mul_maxCurrent_sq C htC,
     gravitationalCoupling_pos C hG htC (by omega), Frame.equivalence G M hr⟩
+
+/-- **The Open Cube NRS³.** On the 3D Cartesian product of three tight-binding chains, distinct
+axes commute; the volumetric quantum `𝒱 = δ(Nx) δ(Ny) δ(Nz)` is strictly positive from
+`4 × 4 × 4` on; Robertson's determinant relation is strict on the maximal current state; and the
+Mandelstam–Tamm efficiency along `x` is `1 / C_x²`. -/
+theorem openCubeNRS3 (Tx Ty Tz : TightBindingChain)
+    (hx : 0 < Tx.t) (hy : 0 < Ty.t) (hz : 0 < Tz.t)
+    (hNx : 4 ≤ Tx.N) (hNy : 4 ≤ Ty.N) (hNz : 4 ≤ Tz.N) :
+    0 < Tx.volQuantum Ty Tz ∧
+    |((Tx.maxCurrentCubeVectorState Ty Tz).bracketMatrix (Tx.cubePairs Ty Tz)).det| <
+      ((Tx.maxCurrentCubeVectorState Ty Tz).covarianceMatrix (Tx.cubePairs Ty Tz)).det ∧
+    (Tx.maxCurrentCubeVectorState Ty Tz).expectation (Tx.alongX Ty Tz Tx.currentObservable) ^ 2 /
+        (4 * ((Tx.maxCurrentCubeVectorState Ty Tz).variance
+              (Tx.alongX Ty Tz Tx.openHamiltonianObservable) *
+            (Tx.maxCurrentCubeVectorState Ty Tz).variance
+              (Tx.alongX Ty Tz Tx.positionObservable))) =
+      1 / Tx.uncertaintyRatio ^ 2 :=
+  ⟨Cube.volQuantum_pos Tx Ty Tz hx.ne' hy.ne' hz.ne' hNx hNy hNz,
+   Cube.robertson_det_strict Tx Ty Tz hx.ne' hy.ne' hz.ne' hNx hNy hNz,
+   Cube.mandelstamTamm_efficiency Tx Ty Tz⟩
+
+/-- **The steps together.** One statement on the chain `C` and the cube `C × Ty × Tz`:
+1. **Step time** (on Physlib's `TightBindingChain`, Joseph Tooby-Smith, and #2096): the spacing
+   cancels in `τ_pas = 1 / (2 |t| cos (π / (N + 1)))` and in `m* c² = 2 t cos² (π / (N + 1))`.
+2. **Open cube** (Physlib #1725, #1756): `𝒱 > 0` and Robertson 1934 strict from `4 × 4 × 4`.
+3. **Equivalence** (`Equivalence`): the weak field of `M` has the slope of `g₀₀` of the frame
+   accelerated with `G M / r₀²`.
+4. **Einstein** (`Gravity`): the Unruh temperature `a / 2π` and, from the Clausius relation on
+   every light sheet, `Ric − ½ R g + Λ g = 8π ℓ² T`. -/
+theorem fork_unification (C : TightBindingChain) (htC : 0 < C.t) (hNC : 4 ≤ C.N)
+    (Ty Tz : TightBindingChain) (hy : 0 < Ty.t) (hz : 0 < Tz.t) (hNy : 4 ≤ Ty.N) (hNz : 4 ≤ Tz.N)
+    {G M r₀ : ℝ} (_hG : 0 < G) (hr : r₀ ≠ 0)
+    {d : ℕ} {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
+    {Ric T : E → BilinForm ℝ (Vector d)} (hRic : ∀ x, (Ric x).IsSymm) (hT : ∀ x, (T x).IsSymm)
+    {ℓ κs A l₀ : ℝ} (hℓ : ℓ ≠ 0) (hκ : κs ≠ 0) (hA : A ≠ 0) (hl : l₀ ≠ 0)
+    (hC : ∀ x, ∀ k : Vector d, ⟪k, k⟫ₘ = 0 →
+      LightSheet.Clausius (1 / (4 * ℓ ^ 2)) κs (Ric x k k) (T x k k) A l₀)
+    (hf : Differentiable ℝ fun x => Einstein.fScalar (8 * π * ℓ ^ 2) (Ric x) (T x))
+    (hR : Differentiable ℝ fun x => trace (Ric x))
+    (hBianchi : ∀ x, fderiv ℝ (fun x => Einstein.fScalar (8 * π * ℓ ^ 2) (Ric x) (T x)) x =
+      (1 / 2 : ℝ) • fderiv ℝ (fun x => trace (Ric x)) x)
+    {a : ℝ} (ha : 0 < a) :
+    stepTime C = 1 / (2 * |C.t| * Real.cos (π / (C.N + 1))) ∧
+    effMass C * C.maxCurrent ^ 2 = 2 * C.t * Real.cos (π / (C.N + 1)) ^ 2 ∧
+    0 < C.volQuantum Ty Tz ∧
+    |((C.maxCurrentCubeVectorState Ty Tz).bracketMatrix (C.cubePairs Ty Tz)).det| <
+      ((C.maxCurrentCubeVectorState Ty Tz).covarianceMatrix (C.cubePairs Ty Tz)).det ∧
+    (HasDerivAt (fun r => -(1 + 2 * Frame.newtonPotential G M r)) (-2 * (G * M / r₀ ^ 2)) r₀ ∧
+      HasDerivAt (Frame.g00 (G * M / r₀ ^ 2)) (-2 * (G * M / r₀ ^ 2)) 0) ∧
+    Rindler.unruhTemperature a * (2 * π / a) = 1 ∧
+    ∃ Λ : ℝ, ∀ x, ∀ p q, Ric x p q - trace (Ric x) / 2 * ⟪p, q⟫ₘ + Λ * ⟪p, q⟫ₘ =
+      8 * π * ℓ ^ 2 * T x p q :=
+  ⟨stepTime_eq C,
+   effMass_mul_maxCurrent_sq C htC,
+   (openCubeNRS3 C Ty Tz htC hy hz hNC hNy hNz).1,
+   (openCubeNRS3 C Ty Tz htC hy hz hNC hNy hNz).2.1,
+   Frame.equivalence G M hr,
+   (acceleratedClock ha).2.2.2.2,
+   einstein_eightPi hRic hT hℓ hκ hA hl hC hf hR hBianchi⟩
 
 end ProperTimeGR
