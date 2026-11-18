@@ -35,6 +35,7 @@
 > 7. **Équivalence et `g₀₀`** : dans le référentiel accéléré, `g₀₀ = −(1 + αξ)² = −(1 + 2Φ) − Φ²` avec `Φ = αξ`, et une horloge statique bat à `1 + αξ` ; le champ faible de `Φ = −GM/r` a, en `r₀`, la même pente de `g₀₀` que le référentiel d'accélération `GM/r₀²`.
 > 8. **Einstein** : l'horloge accélérée fixe la température `α/2π`, et la relation de Clausius sur chaque nappe de lumière, avec `η = 1/(4ℓ²)`, donne `Ric − ½ R g + Λ g = 8π ℓ² T`.
 > 9. **Le cube ouvert NRS³** : sur le produit de trois chaînes, deux observables distinctes parmi `H_k, X_k` commutent si et seulement si elles sont sur des axes différents ; dès `4 × 4 × 4`, le quantum volumétrique est strictement positif (`𝒱 > 0`) et, dans l'état de courant maximal, Robertson 1934 est strict pour les six observables (`|det Ω| < det Σ`) ; dans cet état, le rapport de Mandelstam–Tamm vaut `1/C²` sur chaque axe. Le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein sont réunis dans `fork_unification`.
+> 10. **Les ponts avec l'équipe Physlib** : la norme de l'accélération par paires de Qianli Ma est `G m/‖d‖²`, l'accélération du référentiel de l'étape 7 ; si `r_s = 2GM`, le champ faible `−(1 + 2Φ)` est exactement `−g_tt` de la métrique de Schwarzschild extérieure de Philippe Kevorkian, pour tout `r` ; l'équation d'Einstein de l'étape 8 s'énonce sur les vecteurs de type lumière de Physlib (Matteo Cipollina, Joseph Tooby-Smith).
 
 <div align="center">
 <img src="assets/plaque_temps_pas_einstein.png" alt="Le temps compte les pas : position, simplification de a, lumière et masse, équation d'Einstein" width="860">
@@ -87,6 +88,14 @@ de courant maximal, `det Σ = (C_x C_y C_z)² (b_x b_y b_z)²` (`Cube.det_cov_ma
 et, dès `4 × 4 × 4`, `|det Ω| < det Σ` (`Cube.robertson_det_strict`). Dès `4 × 4 × 4`, `𝒱 > 0`
 (`Cube.volQuantum_pos`) ; dans l'état de courant maximal, le rapport de Mandelstam–Tamm vaut
 `1/C_k²` sur chaque axe (`Cube.mandelstamTamm_efficiency`). Réunis : `openCubeNRS3`.
+
+**Ponts.** Pour `G ≥ 0` et `d ≠ 0`, l'accélération par paires de Qianli Ma a pour norme `G m/‖d‖²`
+(`Bridges.norm_pairGravityAcceleration`) ; en `r₀ = ‖d‖` le champ faible de la source a la pente de
+`g₀₀` du référentiel accéléré de cette norme (`Bridges.equivalence_pairGravity`). Si `r_s = 2GM`,
+`−(1 + 2Φ(r)) = −g_tt(r)` avec le `g_tt = 1 − r_s/r` de Philippe Kevorkian
+(`Bridges.weakField_eq_neg_gttOut`), et en `r₀ ≠ 0`, `−g_tt` a la pente de `g₀₀` du référentiel
+d'accélération `r_s/(2r₀²)` (`Bridges.equivalence_gttOut`). L'équation d'Einstein vaut avec Clausius
+demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eightPi_lightLike`).
 
 **Clôture.** `properTime_generalRelativity` (le pas, Unruh, Einstein) et `fork_unification` (en plus
 `m* c²`, le cube et l'équivalence).
@@ -205,6 +214,27 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 *Modules formels :* [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) (`Cube.axes_commute`, `Cube.pairs_commute_iff`, `Cube.robertson_det`, `Cube.det_cov_maxCurrentCubeState`, `Cube.robertson_det_strict`, `Cube.volQuantum_pos`, `Cube.mandelstamTamm_efficiency`) ;
 [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`openCubeNRS3`, `fork_unification`).
 
+### Étape 10 : les ponts avec l'équipe Physlib
+
+> **Théorème 10.1.** (i) Pour `G ≥ 0` et un déplacement `d ≠ 0`, l'accélération par paires de
+> Qianli Ma vérifie `‖a‖ = G m/‖d‖²` ; en `r₀ = ‖d‖`, le champ faible de la source et le référentiel
+> d'accélération `‖a‖` ont la même pente de `g₀₀`. (ii) Si `r_s = 2GM`, `−(1 + 2Φ(r)) = −g_tt(r)`
+> pour tout `r`, avec `g_tt = 1 − r_s/r` (Philippe Kevorkian, signature `(+, −)`) ; en `r₀ ≠ 0`,
+> `−g_tt` a la pente de `g₀₀` du référentiel d'accélération `r_s/(2r₀²)`. (iii) L'équation d'Einstein
+> de l'étape 8 vaut quand la relation de Clausius est demandée sur les vecteurs de type lumière de
+> Physlib.
+
+<div align="center">
+<img src="assets/plaque_etape10_ponts.png" alt="Accélération par paires de Qianli Ma, métrique de Schwarzschild extérieure de Philippe Kevorkian, vecteurs de type lumière de Matteo Cipollina et Joseph Tooby-Smith" width="860">
+</div>
+
+*Modules formels :* [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) (`norm_pairGravityAcceleration`, `equivalence_pairGravity`, `weakField_eq_neg_gttOut`, `equivalence_gttOut`) ;
+[`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`einstein_eightPi_lightLike`).  
+Fichiers de Physlib utilisés : [`NewtonianGravity.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/ClassicalMechanics/OrbitalMechanics/NewtonianGravity.lean) (Qianli Ma, [PR 2080](https://github.com/leanprover-community/physlib/pull/2080)),
+[`IncompressibleSphere.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/Relativity/General/Schwarzschild/IncompressibleSphere.lean) (Philippe Kevorkian, [PR 1631](https://github.com/leanprover-community/physlib/pull/1631)),
+[`LightLike.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/Relativity/Causality/LightLike.lean) (Matteo Cipollina, Joseph Tooby-Smith).  
+L'hypothèse `r_s = 2GM` est posée, pas déduite : la structure de Physlib ne contient pas la relation `Rc² = 3/(κ ρ₀)`.
+
 ---
 
 ## Physlib : pull requests fusionnées
@@ -225,6 +255,25 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 | [#1986](https://github.com/leanprover-community/physlib/pull/1986) | deux observables du cube commutent si et seulement si elles sont sur des axes différents | 9 |
 
 Les noms actuels des déclarations viennent du [renommage de Joseph Tooby-Smith](https://github.com/leanprover-community/physlib/pull/1792) (« Fix names », 14 octobre 2026).
+---
+
+## L'équipe Physlib sur laquelle reposent les preuves
+
+Liste tirée de l'en-tête `Authors` de chaque fichier de Physlib importé, directement ou non, par ce
+dépôt (99 modules, Physlib `3d9ca099`).
+
+| Auteur | Fichiers de Physlib utilisés | Rôle ici | Étapes |
+|---|---|---|---|
+| Joseph Tooby-Smith | [`TightBindingChain/Basic.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/CondensedMatter/TightBindingChain/Basic.lean), vecteurs et tenseurs de Lorentz, [`MinkowskiProduct.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/Relativity/Tensors/RealTensor/Vector/MinkowskiProduct.lean) (42 modules) | la chaîne, sa bande `E(k)`, le produit de Minkowski | 1, 5, 8, 10 |
+| Tom Ole Diem | [`ProbabilisticTheory/State/Basic.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/ProbabilisticTheory/State/Basic.lean), observables, statistiques, GNS (13 modules) | les états, l'espérance, la variance de toutes les incertitudes | 2, 4, 9 |
+| David Gross | [`HilbertSpace/State/Vector.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/ProbabilisticTheory/HilbertSpace/State/Vector.lean) (3 modules) | les états vectoriels, dont l'état de courant maximal | 2, 4, 9 |
+| Matteo Cipollina | [`Causality/LightLike.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/Relativity/Causality/LightLike.lean), `MinkowskiProduct.lean` (5 modules) | les vecteurs de type lumière, le produit de Minkowski | 8, 10 |
+| Andrea Pari, Robert Sneiderman, Gregory J. Loges | contractions de tenseurs, Levi-Civita, delta de Kronecker (15 modules) | sous les vecteurs de Lorentz | 8 |
+| Raunak Chhatwal | [`ReferenceFrame.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/SpaceAndTime/ReferenceFrame.lean), particules ponctuelles (4 modules) | le référentiel et les particules de la gravitation par paires | 10 |
+| Qianli Ma | [`NewtonianGravity.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/ClassicalMechanics/OrbitalMechanics/NewtonianGravity.lean) | l'accélération par paires | 10 |
+| Philippe Kevorkian | [`IncompressibleSphere.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/Relativity/General/Schwarzschild/IncompressibleSphere.lean) | la métrique de Schwarzschild extérieure | 10 |
+| Eduardo Nava-Hernandez | chaîne ouverte, courant, état de courant maximal, cube (23 modules) | la limite de vitesse, la saturation, le cube | 1–4, 9 |
+
 ---
 
 ## Catalogue des modules Lean
@@ -255,6 +304,11 @@ Les noms actuels des déclarations viennent du [renommage de Joseph Tooby-Smith]
 | [`EinsteinEquation.lean`](src/ProperTimeGeneralRelativity/Gravity/EinsteinEquation.lean) | `einstein_equation` | Clausius partout donne Einstein | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `einstein_eightPi` | Einstein avec couplage `8π ℓ²` | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `properTime_generalRelativity` | le pas, Unruh et Einstein réunis | 0 sorry |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `einstein_eightPi_lightLike` | Einstein sur les vecteurs de type lumière de Physlib | 0 sorry |
+| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `norm_pairGravityAcceleration` | `‖a‖ = G m/‖d‖²` (Qianli Ma) | 0 sorry |
+| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `equivalence_pairGravity` | référentiel accéléré de `‖a‖` = champ faible au premier ordre | 0 sorry |
+| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `weakField_eq_neg_gttOut` | `−(1 + 2Φ) = −g_tt` si `r_s = 2GM` (Philippe Kevorkian) | 0 sorry |
+| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `equivalence_gttOut` | `−g_tt` = référentiel d'accélération `r_s/(2r₀²)` au premier ordre | 0 sorry |
 
 `Unruh.lean`, `Clausius.lean`, `NullForms.lean` et `EinsteinEquation.lean` viennent de
 [`nrs3-tritoro`](https://github.com/naype888-cloud/nrs3-tritoro) (`NRS3Tritoro/Gravity`), copiés
@@ -264,7 +318,7 @@ sans modification sauf le chemin des imports.
 
 ## Compilation et certification du noyau
 
-Lean 4 `v4.35.0`. Seule dépendance : Physlib, au commit de fusion de #2096.
+Lean 4 `v4.35.0`. Seule dépendance : Physlib, au commit de fusion de #2096 (`3d9ca099`).
 
 ```bash
 lake exe cache get

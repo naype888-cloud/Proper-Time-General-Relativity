@@ -10,7 +10,9 @@ public import ProperTimeGeneralRelativity.Niven
 public import ProperTimeGeneralRelativity.Mass
 public import ProperTimeGeneralRelativity.Equivalence
 public import ProperTimeGeneralRelativity.Cube
+public import ProperTimeGeneralRelativity.Bridges
 public import ProperTimeGeneralRelativity.Gravity.EinsteinEquation
+public import Physlib.Relativity.Causality.LightLike
 
 /-!
 # Time counts steps, and the Einstein equation
@@ -44,6 +46,10 @@ public import ProperTimeGeneralRelativity.Gravity.EinsteinEquation
 - `ProperTimeGR.massAndEquivalence` : Niven on the step, the effective mass with `a` cancelled
   in `m* c²`, `α_G > 0`, and the weak field of a mass agreeing to first order with the
   accelerated frame (`Niven`, `Mass`, `Equivalence`).
+- `ProperTimeGR.einstein_eightPi_lightLike` : the same, with the light sheets given by Physlib's
+  light-like vectors (`causalCharacter`, Matteo Cipollina and Joseph Tooby-Smith).
+- `ProperTimeGR.Bridges` : the equivalence on Qianli Ma's Newtonian gravity by pairs and on
+  Philippe Kevorkian's exterior Schwarzschild metric.
 - `ProperTimeGR.fork_unification` : the step time, the rest energy, the open cube, the
   equivalence of `g₀₀`, the Unruh temperature and the Einstein equation in one statement.
 -/
@@ -93,6 +99,25 @@ theorem einstein_eightPi {d : ℕ} {E : Type*} [NormedAddCommGroup E] [NormedSpa
   obtain ⟨Λ, h⟩ := Einstein.einstein_equation hRic hT hκ hA hl hη hC (by rwa [key]) hR
     (by rwa [key])
   exact ⟨Λ, fun x p q => by rw [← key]; exact (h x).1 p q⟩
+
+/-- **Einstein on Physlib's light-like vectors.** `einstein_eightPi` with the Clausius relation
+asked on the vectors `k` with `causalCharacter k = lightLike` (Matteo Cipollina and Joseph
+Tooby-Smith, `Physlib/Relativity/Causality/LightLike.lean`, `lightLike_iff_norm_sq_zero`). -/
+theorem einstein_eightPi_lightLike {d : ℕ} {E : Type*} [NormedAddCommGroup E]
+    [NormedSpace ℝ E] {Ric T : E → BilinForm ℝ (Vector d)} (hRic : ∀ x, (Ric x).IsSymm)
+    (hT : ∀ x, (T x).IsSymm) {ℓ κs A l₀ : ℝ} (hℓ : ℓ ≠ 0) (hκ : κs ≠ 0) (hA : A ≠ 0)
+    (hl : l₀ ≠ 0)
+    (hC : ∀ x, ∀ k : Vector d,
+      Lorentz.Vector.causalCharacter k = Lorentz.Vector.CausalCharacter.lightLike →
+      LightSheet.Clausius (1 / (4 * ℓ ^ 2)) κs (Ric x k k) (T x k k) A l₀)
+    (hf : Differentiable ℝ fun x => Einstein.fScalar (8 * π * ℓ ^ 2) (Ric x) (T x))
+    (hR : Differentiable ℝ fun x => trace (Ric x))
+    (hBianchi : ∀ x, fderiv ℝ (fun x => Einstein.fScalar (8 * π * ℓ ^ 2) (Ric x) (T x)) x =
+      (1 / 2 : ℝ) • fderiv ℝ (fun x => trace (Ric x)) x) :
+    ∃ Λ : ℝ, ∀ x, ∀ p q, Ric x p q - trace (Ric x) / 2 * ⟪p, q⟫ₘ + Λ * ⟪p, q⟫ₘ =
+      8 * π * ℓ ^ 2 * T x p q :=
+  einstein_eightPi hRic hT hℓ hκ hA hl
+    (fun x k hk => hC x k ((Lorentz.Vector.lightLike_iff_norm_sq_zero k).2 hk)) hf hR hBianchi
 
 /-- **Time counts steps, and general relativity.** On a chain `C` with `t ≠ 0` and `N ≥ 2` one
 step lasts `1 / (2 |t| cos (π / (N + 1)))` whatever the spacing, and `n` steps take no time iff

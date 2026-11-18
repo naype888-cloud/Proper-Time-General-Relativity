@@ -11,3 +11,6 @@ import ProperTimeGeneralRelativity
 #print axioms ProperTimeGR.tendsto_uncertaintyRatio_longChain
 #print axioms ProperTimeGR.Cube.pairs_commute_iff
 #print axioms ProperTimeGR.Cube.mandelstamTamm_efficiency
+#print axioms ProperTimeGR.einstein_eightPi_lightLike
+#print axioms ProperTimeGR.Bridges.equivalence_pairGravity
+#print axioms ProperTimeGR.Bridges.equivalence_gttOut
