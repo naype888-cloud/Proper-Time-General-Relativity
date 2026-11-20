@@ -10,6 +10,7 @@ public import PhyslibAlpha.CondensedMatter.TightBindingChain.MaxCurrentState.Sat
 public import PhyslibAlpha.CondensedMatter.TightBindingChain.MaxCurrentState.LongChainMonotonicity
 public import PhyslibAlpha.CondensedMatter.TightBindingChain.MaxCurrentState.LongChainLimit
 public import PhyslibAlpha.CondensedMatter.TightBindingChain.Open.Basic
+public import Mathlib.NumberTheory.Real.GoldenRatio
 
 /-!
 # Time counts steps: the spacing cancels
@@ -29,6 +30,7 @@ time.
 - `ProperTimeGR.stepTime_eq` : `a / maxCurrent = 1 / (2 |t| cos (π / (N + 1)))`.
 - `ProperTimeGR.stepTime_eq_of_eq` : two chains with the same `N` and `t` have the same step time,
   whatever their spacings.
+- `ProperTimeGR.stepTime_of_N_eq_four` : in the frame `N = 4`, one step takes `1 / (φ |t|)`.
 - `ProperTimeGR.elapsed_eq_zero_iff` : `n` steps take no time iff `n = 0`.
 - `ProperTimeGR.elapsed_le_travelTime` : no state crosses `n` spacings in less than `n` steps.
 - `ProperTimeGR.elapsed_eq_travelTime_maxCurrentState` : the maximal current state takes exactly
@@ -69,6 +71,13 @@ whatever their spacings. -/
 theorem stepTime_eq_of_eq (T' : TightBindingChain) (hN : T.N = T'.N) (ht : T.t = T'.t) :
     stepTime T = stepTime T' := by
   rw [stepTime_eq, stepTime_eq, hN, ht]
+
+/-- **The frame.** At four sites `cos (π / 5) = φ / 2`, so one step takes `1 / (φ |t|)`,
+with `φ = (1 + √5) / 2` the golden ratio. -/
+theorem stepTime_of_N_eq_four (hN : T.N = 4) : stepTime T = 1 / (Real.goldenRatio * |T.t|) := by
+  rw [stepTime_eq, hN, show ((4 : ℕ) : ℝ) + 1 = 5 by norm_num, Real.cos_pi_div_five,
+    Real.goldenRatio]
+  ring
 
 /-- `cos (π / (N + 1)) > 0` for `N ≥ 2`. -/
 theorem cos_pi_div_succ_pos {N : ℕ} (hN : 2 ≤ N) : 0 < Real.cos (Real.pi / (N + 1)) := by
