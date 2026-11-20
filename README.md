@@ -361,7 +361,7 @@ lake env lean Verification/Axioms.lean
 - [RS^N³ · Tritoro](https://github.com/naype888-cloud/nrs3-tritoro)
 - [RS^N³ · Mandelstam–Tamm et Cramér–Rao](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao)
 - [RS^N³ · Bekenstein — Bits on the Boundary](https://github.com/naype888-cloud/nrs3-bekenstein)
-- [La chaîne close](https://github.com/naype888-cloud/Anti-Kurt-Godel-Theorem)
+- [La chaîne close](https://github.com/naype888-cloud/nrs3-completude)
 - **[Le temps compte les pas](https://github.com/naype888-cloud/Proper-Time-General-Relativity)** (ce dépôt)
 
 ---
