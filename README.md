@@ -23,7 +23,7 @@
 > un espacement à la vitesse limite, dure donc un temps où `a` se simplifie.
 >
 > <div align="center">
-> <img src="assets/plaque_pas.png" alt="Le temps d'un pas : a sur maxCurrent, où a se simplifie" width="860">
+> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_pas.png"><img src="assets/claro/plaque_pas.png" alt="Le temps d'un pas : a sur maxCurrent, où a se simplifie" width="860"></picture>
 > </div>
 >
 > 1. **`a` se simplifie** : `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))`, le même pour tout espacement ; à quatre sites, `τ_pas = 1/(φ|t|)`, `φ = (1 + √5)/2`.
@@ -38,7 +38,7 @@
 > 10. **Les ponts avec l'équipe Physlib** : la norme de l'accélération par paires de Qianli Ma est `G m/‖d‖²`, l'accélération du référentiel de l'étape 7 ; si `r_s = 2GM`, le champ faible `−(1 + 2Φ)` est exactement `−g_tt` de la métrique de Schwarzschild extérieure de Philippe Kevorkian, pour tout `r` ; l'équation d'Einstein de l'étape 8 s'énonce sur les vecteurs de type lumière de Physlib (Matteo Cipollina, Joseph Tooby-Smith).
 
 <div align="center">
-<img src="assets/plaque_temps_pas_einstein.png" alt="Le temps compte les pas : position, simplification de a, lumière et masse, équation d'Einstein" width="860">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_temps_pas_einstein.png"><img src="assets/claro/plaque_temps_pas_einstein.png" alt="Le temps compte les pas : position, simplification de a, lumière et masse, équation d'Einstein" width="860"></picture>
 </div>
 
 ---
@@ -113,7 +113,7 @@ demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eig
 > `⟨m|[A, X]|n⟩ = a (n − m) ⟨m|A|n⟩`, et `|⟨J⟩_ω| ≤ maxCurrent = 2|a t| cos(π/(N+1))` pour tout état `ω`.
 
 <div align="center">
-<img src="assets/plaque_etape1_saut.png" alt="Position, saut du graphe chemin, commutateur avec la position, limite de vitesse" width="860">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_etape1_saut.png"><img src="assets/claro/plaque_etape1_saut.png" alt="Position, saut du graphe chemin, commutateur avec la position, limite de vitesse" width="860"></picture>
 </div>
 
 *Modules formels :* Physlib `PhyslibAlpha/CondensedMatter/TightBindingChain` : `Open/Basic.lean` (#2096) et `Current/SpeedLimit.lean` (#1724).  
@@ -126,7 +126,7 @@ demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eig
 > À quatre sites, `τ_pas = 1/(φ|t|)`.
 
 <div align="center">
-<img src="assets/plaque_etape2_pas.png" alt="Le pas sans a, le temps de n pas, borne pour tout état, égalité au courant maximal" width="860">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_etape2_pas.png"><img src="assets/claro/plaque_etape2_pas.png" alt="Le pas sans a, le temps de n pas, borne pour tout état, égalité au courant maximal" width="860"></picture>
 </div>
 
 *Modules formels :* [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) (`stepTime_eq`, `stepTime_eq_of_eq`, `stepTime_of_N_eq_four`, `stepTime_pos`, `elapsed_eq_zero_iff`, `elapsed_le_travelTime`, `elapsed_eq_travelTime_maxCurrentState`).  
@@ -138,7 +138,7 @@ demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eig
 > en `N = 2`, `2|t| τ_pas = 2`.
 
 <div align="center">
-<img src="assets/plaque_niven.png" alt="Niven : cos(π/(N+1)) irrationnel dès N = 3, donc le pas aussi ; en N = 2 il vaut 2" width="860">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_niven.png"><img src="assets/claro/plaque_niven.png" alt="Niven : cos(π/(N+1)) irrationnel dès N = 3, donc le pas aussi ; en N = 2 il vaut 2" width="860"></picture>
 </div>
 
 *Modules formels :* [`Niven.lean`](src/ProperTimeGeneralRelativity/Niven.lean) (`cos_pi_div_succ_irrational`, `stepTime_irrational`, `stepTime_two`).  
@@ -152,7 +152,7 @@ Niven (Mathlib) : en `0 ≤ r ≤ 1`, `cos(rπ) ∈ ℚ` force `r ∈ {0, 1/3, 1
 > **Théorème 4.2.** En `N = 4`, `C² = (99 − 42√5)/5` ; pour tout `N ≥ 4`, `C² ∈ [(99 − 42√5)/5, π²/3 − 2)`, uniformément en `N`.
 
 <div align="center">
-<img src="assets/plaque_etape3_lumiere_masse.png" alt="Saturation exactement en N = 2, 3 ; rapport d'incertitude strictement entre 1 et la limite de Szegő" width="860">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_etape3_lumiere_masse.png"><img src="assets/claro/plaque_etape3_lumiere_masse.png" alt="Saturation exactement en N = 2, 3 ; rapport d'incertitude strictement entre 1 et la limite de Szegő" width="860"></picture>
 </div>
 
 *Modules formels :* Physlib `MaxCurrentState/Saturation.lean` (#1718), `UncertaintyRatio.lean` (#1723), `LongChainMonotonicity.lean` (#1735), `LongChainLimit.lean` (#1734) ; réunis dans [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) (`timeCountsSteps`, `tendsto_uncertaintyRatio_longChain`).  
@@ -165,7 +165,7 @@ La forme close de `C²` en `n = 5` avec `cos(π/5) = (1 + √5)/4`, puis la mono
 > `m* c² = 2 t cos²(π/(N+1))`, `m* c² τ_pas = cos(π/(N+1))`, et `α_G = G m*²/c > 0` (`ħ = 1`).
 
 <div align="center">
-<img src="assets/plaque_masse.png" alt="Bande, courbure E''(0), masse effective, énergie au repos sans a, couplage gravitationnel" width="860">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_masse.png"><img src="assets/claro/plaque_masse.png" alt="Bande, courbure E''(0), masse effective, énergie au repos sans a, couplage gravitationnel" width="860"></picture>
 </div>
 
 *Modules formels :* [`Mass.lean`](src/ProperTimeGeneralRelativity/Mass.lean) (`band_eq_energyEigenvalue`, `deriv_deriv_band_zero`, `effMass_eq`, `effMass_mul_maxCurrent_sq`, `restEnergy_mul_stepTime`, `gravitationalCoupling_pos`).  
@@ -177,7 +177,7 @@ La masse vient de la courbure de la bande de Physlib : aucune constante n'est ch
 > `ẍ² − ẗ² = α²`, a pour plus courte période imaginaire `2π/α`, et `T · 2π/α = 1`.
 
 <div align="center">
-<img src="assets/plaque_etape4_horloge.png" alt="Ligne d'univers de Rindler, temps propre, accélération, période imaginaire, température d'Unruh" width="860">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_etape4_horloge.png"><img src="assets/claro/plaque_etape4_horloge.png" alt="Ligne d'univers de Rindler, temps propre, accélération, période imaginaire, température d'Unruh" width="860"></picture>
 </div>
 
 *Modules formels :* [`Unruh.lean`](src/ProperTimeGeneralRelativity/Gravity/Unruh.lean) (`velocity_norm`, `acceleration_norm`, `periodic_two_pi`, `period_ge`, `unruhTemperature_mul_period`) ;
@@ -191,7 +191,7 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 > Pour `Φ(r) = −GM/r`, la pente de `−(1 + 2Φ)` en `r₀` est celle de `g₀₀` du référentiel d'accélération `GM/r₀²`.
 
 <div align="center">
-<img src="assets/plaque_equivalence.png" alt="Référentiel accéléré, métrique, g00 en champ faible, rythme des horloges, équivalence avec le potentiel newtonien" width="860">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_equivalence.png"><img src="assets/claro/plaque_equivalence.png" alt="Référentiel accéléré, métrique, g00 en champ faible, rythme des horloges, équivalence avec le potentiel newtonien" width="860"></picture>
 </div>
 
 *Modules formels :* [`Equivalence.lean`](src/ProperTimeGeneralRelativity/Equivalence.lean) (`Frame.metric`, `Frame.time_zero`, `Frame.space_zero`, `Frame.g00_eq_weakField`, `Frame.clockRate`, `Frame.equivalence`).  
@@ -203,7 +203,7 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 > point et si `∇f = ½ ∇R`, il existe `Λ` constante avec `Ric − ½ R g + Λ g = 8π ℓ² T`.
 
 <div align="center">
-<img src="assets/plaque_etape5_einstein.png" alt="Clausius avec η = 1/(4ℓ²) donne R_kk = 8πℓ² T_kk, puis l'équation d'Einstein" width="860">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_etape5_einstein.png"><img src="assets/claro/plaque_etape5_einstein.png" alt="Clausius avec η = 1/(4ℓ²) donne R_kk = 8πℓ² T_kk, puis l'équation d'Einstein" width="860"></picture>
 </div>
 
 *Modules formels :* [`Clausius.lean`](src/ProperTimeGeneralRelativity/Gravity/Clausius.lean) (`clausius_iff`, `eight_pi`) ;
@@ -216,7 +216,7 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 > **Proposition 9.1 (Physlib).** Parmi les six observables `H_k, X_k`, deux observables distinctes commutent si et seulement si elles sont sur des axes différents. Dans tout état, `(b_x b_y b_z)² ≤ det Σ` avec `b_k = ω⟨[H_k, X_k]⟩`. Dans l'état de courant maximal du cube : `det Σ = (C_x C_y C_z)² (b_x b_y b_z)²` ; dès `4 × 4 × 4`, `|det Ω| < det Σ` ; sur chaque axe, `⟨J_k⟩² / (4 Var H_k Var X_k) = 1/C_k²`. Dès `4 × 4 × 4`, `𝒱 = δ(Nx) δ(Ny) δ(Nz) > 0`.
 
 <div align="center">
-<img src="assets/plaque_etape9_cube.png" alt="Axes distincts qui commutent, déterminant de Robertson 1934, quantum volumétrique, rapport de Mandelstam–Tamm" width="860">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_etape9_cube.png"><img src="assets/claro/plaque_etape9_cube.png" alt="Axes distincts qui commutent, déterminant de Robertson 1934, quantum volumétrique, rapport de Mandelstam–Tamm" width="860"></picture>
 </div>
 
 *Modules formels :* [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) (`Cube.axes_commute`, `Cube.pairs_commute_iff`, `Cube.robertson_det`, `Cube.det_cov_maxCurrentCubeState`, `Cube.robertson_det_strict`, `Cube.volQuantum_pos`, `Cube.mandelstamTamm_efficiency`) ;
@@ -233,7 +233,7 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 > Physlib.
 
 <div align="center">
-<img src="assets/plaque_etape10_ponts.png" alt="Accélération par paires de Qianli Ma, métrique de Schwarzschild extérieure de Philippe Kevorkian, vecteurs de type lumière de Matteo Cipollina et Joseph Tooby-Smith" width="860">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_etape10_ponts.png"><img src="assets/claro/plaque_etape10_ponts.png" alt="Accélération par paires de Qianli Ma, métrique de Schwarzschild extérieure de Philippe Kevorkian, vecteurs de type lumière de Matteo Cipollina et Joseph Tooby-Smith" width="860"></picture>
 </div>
 
 *Modules formels :* [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) (`norm_pairGravityAcceleration`, `equivalence_pairGravity`, `weakField_eq_neg_gttOut`, `equivalence_gttOut`) ;
