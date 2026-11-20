@@ -6,6 +6,7 @@ Authors: Eduardo Nava-Hernandez, José Arturo Nava-Hernández
 module
 
 public import ProperTimeGeneralRelativity.StepTime
+public import ProperTimeGeneralRelativity.FourSites
 public import ProperTimeGeneralRelativity.Niven
 public import ProperTimeGeneralRelativity.Mass
 public import ProperTimeGeneralRelativity.Equivalence

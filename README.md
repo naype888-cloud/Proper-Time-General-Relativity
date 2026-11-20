@@ -26,10 +26,10 @@
 > <img src="assets/plaque_pas.png" alt="Le temps d'un pas : a sur maxCurrent, où a se simplifie" width="860">
 > </div>
 >
-> 1. **`a` se simplifie** : `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))`, le même pour tout espacement.
+> 1. **`a` se simplifie** : `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))`, le même pour tout espacement ; à quatre sites, `τ_pas = 1/(φ|t|)`, `φ = (1 + √5)/2`.
 > 2. **Le temps compte les pas** : `n` pas durent `n · τ_pas` ; aucun état ne parcourt `n` espacements plus vite ; l'état de courant maximal les parcourt exactement en ce temps.
 > 3. **Sans pas, pas de temps** : `n · τ_pas = 0 ⟺ n = 0`.
-> 4. **Lumière ou masse** : l'état de courant maximal sature Robertson–Schrödinger exactement en `N = 2, 3` ; dès `N = 4` son rapport d'incertitude vérifie `1 < C < √(π²/3 − 2)`, et `C → √(π²/3 − 2)` quand `N → ∞`.
+> 4. **Lumière ou masse** : l'état de courant maximal sature Robertson–Schrödinger exactement en `N = 2, 3` ; dès `N = 4` son rapport d'incertitude vérifie `1 < C < √(π²/3 − 2)`, et `C → √(π²/3 − 2)` quand `N → ∞` ; en `N = 4`, `C² = (99 − 42√5)/5`, et pour tout `N ≥ 4`, `C² ∈ [(99 − 42√5)/5, π²/3 − 2)`.
 > 5. **Niven** : dès `N = 3`, `cos(π/(N+1))` est irrationnel, donc le pas n'est jamais une fraction rationnelle de `1/|t|`.
 > 6. **Masse effective** : la masse effective de la bande, `m* = 1/E''(0) = 1/(2 t a²)`, a une énergie au repos `m* c² = 2 t cos²(π/(N+1))` où `a` se simplifie encore ; `α_G = G m*²/c > 0`.
 > 7. **Équivalence et `g₀₀`** : dans le référentiel accéléré, `g₀₀ = −(1 + αξ)² = −(1 + 2Φ) − Φ²` avec `Φ = αξ`, et une horloge statique bat à `1 + αξ` ; le champ faible de `Φ = −GM/r` a, en `r₀`, la même pente de `g₀₀` que le référentiel d'accélération `GM/r₀²`.
@@ -47,7 +47,8 @@
 
 **Le pas.** `stepTime T = a / maxCurrent`, et `stepTime_eq` : il vaut `1 / (2|t| cos(π/(N+1)))`.
 Deux chaînes de même `N` et même `t` ont le même pas, quel que soit leur espacement
-(`stepTime_eq_of_eq`) ; il est strictement positif pour `t ≠ 0`, `N ≥ 2` (`stepTime_pos`).
+(`stepTime_eq_of_eq`) ; il est strictement positif pour `t ≠ 0`, `N ≥ 2` (`stepTime_pos`). À quatre sites, `cos(π/5) = φ/2` et
+`τ_pas = 1/(φ|t|)` (`stepTime_of_N_eq_four`).
 
 **Le temps de `n` pas.** `elapsed T n = n · stepTime T`. Il est nul exactement quand `n = 0`
 (`elapsed_eq_zero_iff`). Pour tout état de courant non nul, parcourir `n` espacements prend au
@@ -57,7 +58,9 @@ en ce temps (`elapsed_eq_travelTime_maxCurrentState`).
 **Lumière ou masse.** Le défaut de Gram de l'état de courant maximal est nul exactement en
 `N = 2, 3`, et dès `N = 4` le rapport d'incertitude est strictement entre `1` et `√(π²/3 − 2)`.
 Avec ce qui précède : `timeCountsSteps`. Quand `N → ∞`, `C → √(π²/3 − 2)`
-(`tendsto_uncertaintyRatio_longChain`).
+(`tendsto_uncertaintyRatio_longChain`). En `N = 4`, `C² = (99 − 42√5)/5`
+(`uncertaintyRatio_sq_of_N_eq_four`), et pour tout `N ≥ 4`, `C² ∈ [(99 − 42√5)/5, π²/3 − 2)`
+(`uncertaintyRatio_sq_mem_Ico`).
 
 **Niven.** `cos(π/(N+1)) ∉ ℚ` pour `N ≥ 3` (`cos_pi_div_succ_irrational`, sur le théorème de
 Niven de Mathlib), donc `2|t| τ_pas ∉ ℚ` (`stepTime_irrational`) ; en `N = 2`, `2|t| τ_pas = 2`
@@ -120,13 +123,14 @@ demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eig
 
 > **Théorème 2.1.** `τ_pas = a / maxCurrent = 1 / (2|t| cos(π/(N+1)))` ; `t_n = n τ_pas` ;
 > `t_n ≤ n a / |⟨J⟩_ω|` pour tout état de courant non nul ; égalité pour l'état de courant maximal ; `t_n = 0 ⟺ n = 0`.
+> À quatre sites, `τ_pas = 1/(φ|t|)`.
 
 <div align="center">
 <img src="assets/plaque_etape2_pas.png" alt="Le pas sans a, le temps de n pas, borne pour tout état, égalité au courant maximal" width="860">
 </div>
 
-*Modules formels :* [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) (`stepTime_eq`, `stepTime_eq_of_eq`, `stepTime_pos`, `elapsed_eq_zero_iff`, `elapsed_le_travelTime`, `elapsed_eq_travelTime_maxCurrentState`).  
-`|a t| = a |t|` car `a > 0`, puis `a / (a · b) = 1 / b`.
+*Modules formels :* [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) (`stepTime_eq`, `stepTime_eq_of_eq`, `stepTime_of_N_eq_four`, `stepTime_pos`, `elapsed_eq_zero_iff`, `elapsed_le_travelTime`, `elapsed_eq_travelTime_maxCurrentState`).  
+`|a t| = a |t|` car `a > 0`, puis `a / (a · b) = 1 / b` ; en `N = 4`, `cos(π/5) = (1 + √5)/4` (Mathlib).
 
 ### Étape 3 : Niven — le pas n'est jamais rationnel dès `N = 3`
 
@@ -144,12 +148,16 @@ Niven (Mathlib) : en `0 ≤ r ≤ 1`, `cos(rπ) ∈ ℚ` force `r ∈ {0, 1/3, 1
 
 > **Proposition 4.1 (Physlib).** L'état de courant maximal sature Robertson–Schrödinger exactement
 > en `N = 2, 3` ; dès `N = 4`, `1 < C < √(π²/3 − 2)` ; et `C → √(π²/3 − 2)` quand `N → ∞`.
+>
+> **Théorème 4.2.** En `N = 4`, `C² = (99 − 42√5)/5` ; pour tout `N ≥ 4`, `C² ∈ [(99 − 42√5)/5, π²/3 − 2)`, uniformément en `N`.
 
 <div align="center">
 <img src="assets/plaque_etape3_lumiere_masse.png" alt="Saturation exactement en N = 2, 3 ; rapport d'incertitude strictement entre 1 et la limite de Szegő" width="860">
 </div>
 
-*Modules formels :* Physlib `MaxCurrentState/Saturation.lean` (#1718), `UncertaintyRatio.lean` (#1723), `LongChainMonotonicity.lean` (#1735), `LongChainLimit.lean` (#1734) ; réunis dans [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) (`timeCountsSteps`, `tendsto_uncertaintyRatio_longChain`).
+*Modules formels :* Physlib `MaxCurrentState/Saturation.lean` (#1718), `UncertaintyRatio.lean` (#1723), `LongChainMonotonicity.lean` (#1735), `LongChainLimit.lean` (#1734) ; réunis dans [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) (`timeCountsSteps`, `tendsto_uncertaintyRatio_longChain`).  
+*Module formel du cadre :* [`FourSites.lean`](src/ProperTimeGeneralRelativity/FourSites.lean) (`uncertaintyRatioSqForm_five`, `uncertaintyRatio_sq_of_N_eq_four`, `uncertaintyRatio_sq_mem_Ico`).  
+La forme close de `C²` en `n = 5` avec `cos(π/5) = (1 + √5)/4`, puis la monotonie (#1735) et la borne de Szegő (#1734).
 
 ### Étape 5 : la masse effective ; `a` se simplifie dans `m* c²`
 
@@ -281,10 +289,13 @@ dépôt (99 modules, Physlib `3d9ca099`).
 | Module | Déclaration | Signification | Statut |
 |---|---|---|---|
 | [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `stepTime_eq` | `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))` | 0 sorry |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `stepTime_of_N_eq_four` | `τ_pas = 1/(φ|t|)` à quatre sites | 0 sorry |
 | [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `elapsed_eq_zero_iff` | sans pas, pas de temps | 0 sorry |
 | [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `elapsed_le_travelTime` | aucun état plus rapide que les pas | 0 sorry |
 | [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `timeCountsSteps` | le temps compte les pas ; lumière ou masse | 0 sorry |
 | [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `tendsto_uncertaintyRatio_longChain` | `C → √(π²/3 − 2)` quand `N → ∞` | 0 sorry |
+| [`FourSites.lean`](src/ProperTimeGeneralRelativity/FourSites.lean) | `uncertaintyRatio_sq_of_N_eq_four` | `C² = (99 − 42√5)/5` en `N = 4` | 0 sorry |
+| [`FourSites.lean`](src/ProperTimeGeneralRelativity/FourSites.lean) | `uncertaintyRatio_sq_mem_Ico` | `C² ∈ [(99 − 42√5)/5, π²/3 − 2)` pour `N ≥ 4` | 0 sorry |
 | [`Niven.lean`](src/ProperTimeGeneralRelativity/Niven.lean) | `stepTime_irrational` | `2|t| τ_pas ∉ ℚ` dès `N = 3` | 0 sorry |
 | [`Mass.lean`](src/ProperTimeGeneralRelativity/Mass.lean) | `effMass_mul_maxCurrent_sq` | `m* c² = 2 t cos²(π/(N+1))`, sans `a` | 0 sorry |
 | [`Mass.lean`](src/ProperTimeGeneralRelativity/Mass.lean) | `gravitationalCoupling_pos` | `α_G = G m*²/c > 0` | 0 sorry |
