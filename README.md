@@ -7,6 +7,7 @@
 *Dépôt 30 · vérification formelle en Lean 4 · 0 sorry · sur Physlib*
 
 [![Lean 4](https://img.shields.io/badge/Lean_4-v4.35.0-blue.svg?style=flat-square)](https://leanprover.github.io/)
+[![Mathlib](https://img.shields.io/badge/Mathlib-v%C3%A9rifi%C3%A9-2ea44f.svg?style=flat-square)](https://github.com/leanprover-community/mathlib4)
 [![Physlib](https://img.shields.io/badge/Physlib-%232096%20fusionn%C3%A9e-8957e5.svg?style=flat-square)](https://github.com/leanprover-community/physlib/pull/2096)
 [![Kernel Status](https://img.shields.io/badge/Kernel-0%20sorry%20%7C%20axiomes%20standard-brightgreen.svg?style=flat-square)](Verification/Axioms.lean)
 
@@ -366,12 +367,16 @@ lake env lean Verification/Axioms.lean
 
 ---
 
-<div align="center">
-
-*L'espacement se simplifie ; il reste les pas, et sans pas il n'y a pas de temps.*
-
-</div>
-
 ## Licence
 
 NRS Noncommercial License 1.0.0, voir [`LICENSE`](LICENSE).
+
+---
+
+<div align="center">
+
+### 📐 *« L'espacement se simplifie ; il reste les pas, et sans pas il n'y a pas de temps. »*
+
+**Eduardo Nava Hernández · José Arturo Nava Hernández** · [naype888-cloud](https://github.com/naype888-cloud)
+
+</div>
