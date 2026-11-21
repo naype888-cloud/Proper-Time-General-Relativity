@@ -108,6 +108,10 @@ demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eig
 
 ## Les étapes
 
+<div align="center">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_proper_time_etapes.png"><img src="assets/claro/plaque_proper_time_etapes.png" alt="L'échelle déductive en dix étapes : du saut quantique aux équations d'Einstein" width="860"></picture>
+</div>
+
 ### Étape 1 : l'espacement n'entre que par la position
 
 > **Proposition 1.1 (Physlib).** `X = Σ a n |n⟩⟨n|`, `⟨m|H|n⟩ = E₀ δ_mn − t A(P_N)_mn`,
