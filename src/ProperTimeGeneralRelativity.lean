@@ -12,6 +12,8 @@ public import ProperTimeGeneralRelativity.Mass
 public import ProperTimeGeneralRelativity.Equivalence
 public import ProperTimeGeneralRelativity.Cube
 public import ProperTimeGeneralRelativity.Bridges
+public import ProperTimeGeneralRelativity.PathGraph
+public import ProperTimeGeneralRelativity.GramVector
 public import ProperTimeGeneralRelativity.Gravity.EinsteinEquation
 public import Physlib.Relativity.Causality.LightLike
 
@@ -23,7 +25,7 @@ public import Physlib.Relativity.Causality.LightLike
    lasts `1 / (2 |t| cos (π / (N + 1)))` whatever `a` is. `n` steps take `n` step times, no state
    is faster, and no step means no time. The maximal current state is light at `N = 2, 3` and
    massive from `N = 4` on, with uncertainty ratio `1 < C < √(π²/3 − 2)`.
-2. **The open cube NRS³** (`Cube`). On the product of three chains `Tx`, `Ty`, `Tz`, two distinct
+2. **The open cube** (`Cube`). On the product of three chains `Tx`, `Ty`, `Tz`, two distinct
    observables among `H_k`, `X_k` commute iff they lie on different axes; from `4 × 4 × 4` on
    the volumetric quantum `𝒱 = δ(Nx) δ(Ny) δ(Nz)` is positive and Robertson 1934 is strict in
    the maximal current state, `|det Ω| < det Σ`; and the Mandelstam–Tamm ratio of that state is
@@ -39,11 +41,14 @@ public import Physlib.Relativity.Causality.LightLike
 ## Main results
 
 - `ProperTimeGR.timeCountsSteps` : the spacing cancels and time counts steps.
-- `ProperTimeGR.openCubeNRS3` : the open cube, volumetric quantum, strict Robertson 1934 and the
-  Mandelstam–Tamm ratio `1 / C²` on each axis.
+- `ProperTimeGR.openCube` : the open cube, volumetric quantum, strict Robertson 1934 and the
+   Mandelstam–Tamm ratio `1 / C²` on each axis.
 - `ProperTimeGR.acceleratedClock` : proper time, acceleration `a`, period `2π / a`, `T = a / 2π`.
 - `ProperTimeGR.einstein_eightPi` : the Einstein equation with coupling `8π ℓ²`.
 - `ProperTimeGR.properTime_generalRelativity` : items 1, 3 and 4 together.
+- `ProperTimeGR.properTime_generalRelativity_pathGraph` : the same, with the step time read off
+  the path graph: `A(P_N) v = λ v`, `H v = (E₀ − t λ) v` (#2096) and `τ_pas = 1 / (|t| λ)`,
+  `λ = 2 cos (π / (N + 1))` (`PathGraph`).
 - `ProperTimeGR.massAndEquivalence` : Niven on the step, the effective mass with `a` cancelled
   in `m* c²`, `α_G > 0`, and the weak field of a mass agreeing to first order with the
   accelerated frame (`Niven`, `Mass`, `Equivalence`).
@@ -51,7 +56,7 @@ public import Physlib.Relativity.Causality.LightLike
   light-like vectors (`causalCharacter`, Matteo Cipollina and Joseph Tooby-Smith).
 - `ProperTimeGR.Bridges` : the equivalence on Qianli Ma's Newtonian gravity by pairs and on
   Philippe Kevorkian's exterior Schwarzschild metric.
-- `ProperTimeGR.fork_unification` : the step time, the rest energy, the open cube, the
+- `ProperTimeGR.unified_properTime_generalRelativity` : the step time, the rest energy, the open cube, the
   equivalence of `g₀₀`, the Unruh temperature and the Einstein equation in one statement.
 -/
 
@@ -159,11 +164,11 @@ theorem massAndEquivalence (C : TightBindingChain) (htC : 0 < C.t) (hNC : 3 ≤ 
   ⟨stepTime_irrational C htC.ne' hNC, effMass_mul_maxCurrent_sq C htC,
     gravitationalCoupling_pos C hG htC (by omega), Frame.equivalence G M hr⟩
 
-/-- **The open cube NRS³.** On the product of three chains with `t ≠ 0` and `N ≥ 4`: two
+/-- **The open cube.** On the product of three chains with `t ≠ 0` and `N ≥ 4`: two
 distinct observables among `H_k`, `X_k` commute iff they lie on different axes; the volumetric
 quantum `𝒱 = δ(Nx) δ(Ny) δ(Nz)` is positive; Robertson 1934 is strict in the maximal current
 state; and the Mandelstam–Tamm ratio of that state is `1 / C²` on each axis. -/
-theorem openCubeNRS3 (Tx Ty Tz : TightBindingChain)
+theorem openCube (Tx Ty Tz : TightBindingChain)
     (hx : Tx.t ≠ 0) (hy : Ty.t ≠ 0) (hz : Tz.t ≠ 0)
     (hNx : 4 ≤ Tx.N) (hNy : 4 ≤ Ty.N) (hNz : 4 ≤ Tz.N) :
     (∀ p q : Fin 2 × Fin 3, p ≠ q →
@@ -203,7 +208,7 @@ theorem openCubeNRS3 (Tx Ty Tz : TightBindingChain)
    accelerated with `G M / r₀²`.
 4. **Einstein** (`Gravity`): the Unruh temperature `a / 2π` and, from the Clausius relation on
    every light sheet, `Ric − ½ R g + Λ g = 8π ℓ² T`. -/
-theorem fork_unification (C : TightBindingChain) (htC : 0 < C.t) (hNC : 4 ≤ C.N)
+theorem unified_properTime_generalRelativity (C : TightBindingChain) (htC : 0 < C.t) (hNC : 4 ≤ C.N)
     (Ty Tz : TightBindingChain) (hy : 0 < Ty.t) (hz : 0 < Tz.t) (hNy : 4 ≤ Ty.N) (hNz : 4 ≤ Tz.N)
     {G M r₀ : ℝ} (hr : r₀ ≠ 0)
     {d : ℕ} {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
@@ -233,5 +238,36 @@ theorem fork_unification (C : TightBindingChain) (htC : 0 < C.t) (hNC : 4 ≤ C.
    Frame.equivalence G M hr,
    (acceleratedClock ha).2.2.2.2,
    einstein_eightPi hRic hT hℓ hκ hA hl hC hf hR hBianchi⟩
+
+/-- **Proper time and general relativity, from the path graph.** On the open chain `C`, the vector
+`v m = sin ((m + 1) π / (N + 1))` is an eigenvector of the adjacency matrix of the path graph `P_N`
+with eigenvalue `λ = 2 cos (π / (N + 1))`, hence of the open Hamiltonian with energy `E₀ − t λ`
+(#2096); one step lasts `1 / (|t| λ)` and `n` steps take no time iff `n = 0`; the accelerated clock
+has temperature `a / 2π`; and the Clausius relation on every light sheet gives the Einstein
+equation with coupling `8π ℓ²`. -/
+theorem properTime_generalRelativity_pathGraph (C : TightBindingChain) (htC : C.t ≠ 0)
+    (hNC : 2 ≤ C.N) {d : ℕ} {E : Type*} [NormedAddCommGroup E]
+    [NormedSpace ℝ E] {Ric T : E → BilinForm ℝ (Vector d)} (hRic : ∀ x, (Ric x).IsSymm)
+    (hT : ∀ x, (T x).IsSymm) {ℓ κs A l₀ : ℝ} (hℓ : ℓ ≠ 0) (hκ : κs ≠ 0) (hA : A ≠ 0)
+    (hl : l₀ ≠ 0)
+    (hC : ∀ x, ∀ k : Vector d, ⟪k, k⟫ₘ = 0 →
+      LightSheet.Clausius (1 / (4 * ℓ ^ 2)) κs (Ric x k k) (T x k k) A l₀)
+    (hf : Differentiable ℝ fun x => Einstein.fScalar (8 * π * ℓ ^ 2) (Ric x) (T x))
+    (hR : Differentiable ℝ fun x => trace (Ric x))
+    (hBianchi : ∀ x, fderiv ℝ (fun x => Einstein.fScalar (8 * π * ℓ ^ 2) (Ric x) (T x)) x =
+      (1 / 2 : ℝ) • fderiv ℝ (fun x => trace (Ric x)) x)
+    {a : ℝ} (ha : 0 < a) :
+    (Matrix.mulVec ((SimpleGraph.pathGraph C.N).adjMatrix ℝ) (sinVector C.N) =
+        pathEigenvalue C.N • sinVector C.N ∧
+      Matrix.mulVec (openHamiltonianMatrix C) (fun m => (sinVector C.N m : ℂ)) =
+        ((C.E0 - C.t * pathEigenvalue C.N : ℝ) : ℂ) • (fun m => (sinVector C.N m : ℂ)) ∧
+      stepTime C = 1 / (|C.t| * pathEigenvalue C.N) ∧
+      ∀ n : ℕ, elapsed C n = 0 ↔ n = 0) ∧
+    Rindler.unruhTemperature a * (2 * π / a) = 1 ∧
+    ∃ Λ : ℝ, ∀ x, ∀ p q, Ric x p q - trace (Ric x) / 2 * ⟪p, q⟫ₘ + Λ * ⟪p, q⟫ₘ =
+      8 * π * ℓ ^ 2 * T x p q :=
+  have h := properTime_generalRelativity C htC hNC hRic hT hℓ hκ hA hl hC hf hR hBianchi ha
+  ⟨⟨adjMatrix_pathGraph_mulVec_sin C.N, openHamiltonian_mulVec_sin C,
+    stepTime_eq_pathEigenvalue C, h.1.2⟩, h.2⟩
 
 end ProperTimeGR

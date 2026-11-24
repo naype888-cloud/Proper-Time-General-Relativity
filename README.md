@@ -35,7 +35,7 @@
 > 6. **Masse effective** : la masse effective de la bande, `m* = 1/E''(0) = 1/(2 t a²)`, a une énergie au repos `m* c² = 2 t cos²(π/(N+1))` où `a` se simplifie encore ; `α_G = G m*²/c > 0`.
 > 7. **Équivalence et `g₀₀`** : dans le référentiel accéléré, `g₀₀ = −(1 + αξ)² = −(1 + 2Φ) − Φ²` avec `Φ = αξ`, et une horloge statique bat à `1 + αξ` ; le champ faible de `Φ = −GM/r` a, en `r₀`, la même pente de `g₀₀` que le référentiel d'accélération `GM/r₀²`.
 > 8. **Einstein** : l'horloge accélérée fixe la température `α/2π`, et la relation de Clausius sur chaque nappe de lumière, avec `η = 1/(4ℓ²)`, donne `Ric − ½ R g + Λ g = 8π ℓ² T`.
-> 9. **Le cube ouvert NRS³** : sur le produit de trois chaînes, deux observables distinctes parmi `H_k, X_k` commutent si et seulement si elles sont sur des axes différents ; dès `4 × 4 × 4`, le quantum volumétrique est strictement positif (`𝒱 > 0`) et, dans l'état de courant maximal, Robertson 1934 est strict pour les six observables (`|det Ω| < det Σ`) ; dans cet état, le rapport de Mandelstam–Tamm vaut `1/C²` sur chaque axe. Le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein sont réunis dans `fork_unification`.
+> 9. **Le cube ouvert** : sur le produit de trois chaînes, deux observables distinctes parmi `H_k, X_k` commutent si et seulement si elles sont sur des axes différents ; dès `4 × 4 × 4`, le quantum volumétrique est strictement positif (`𝒱 > 0`) et, dans l'état de courant maximal, Robertson 1934 est strict pour les six observables (`|det Ω| < det Σ`) ; dans cet état, le rapport de Mandelstam–Tamm vaut `1/C²` sur chaque axe. Le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein sont réunis dans `unified_properTime_generalRelativity`.
 > 10. **Les ponts avec l'équipe Physlib** : la norme de l'accélération par paires de Qianli Ma est `G m/‖d‖²`, l'accélération du référentiel de l'étape 7 ; si `r_s = 2GM`, le champ faible `−(1 + 2Φ)` est exactement `−g_tt` de la métrique de Schwarzschild extérieure de Philippe Kevorkian, pour tout `r` ; l'équation d'Einstein de l'étape 8 s'énonce sur les vecteurs de type lumière de Physlib (Matteo Cipollina, Joseph Tooby-Smith).
 
 <div align="center">
@@ -84,14 +84,14 @@ par le temps propre, de période imaginaire minimale `2π/α` et de température
 (`acceleratedClock`). Clausius sur chaque nappe de lumière avec `η = 1/(4ℓ²)`, et `∇f = ½ ∇R`,
 donnent l'équation d'Einstein de couplage `8π ℓ²` (`einstein_eightPi`).
 
-**Le cube ouvert NRS³.** Sur le cube `Tx × Ty × Tz`, les observables d'axes différents commutent
+**Le cube ouvert.** Sur le cube `Tx × Ty × Tz`, les observables d'axes différents commutent
 (`Cube.axes_commute`) ; parmi les six observables `H_k, X_k`, deux observables distinctes
 commutent si et seulement si elles sont sur des axes différents (`Cube.pairs_commute_iff`). Dans
 tout état, `(b_x b_y b_z)² ≤ det Σ` avec `b_k = ω⟨[H_k, X_k]⟩` (`Cube.robertson_det`) ; dans l'état
 de courant maximal, `det Σ = (C_x C_y C_z)² (b_x b_y b_z)²` (`Cube.det_cov_maxCurrentCubeState`)
 et, dès `4 × 4 × 4`, `|det Ω| < det Σ` (`Cube.robertson_det_strict`). Dès `4 × 4 × 4`, `𝒱 > 0`
 (`Cube.volQuantum_pos`) ; dans l'état de courant maximal, le rapport de Mandelstam–Tamm vaut
-`1/C_k²` sur chaque axe (`Cube.mandelstamTamm_efficiency`). Réunis : `openCubeNRS3`.
+`1/C_k²` sur chaque axe (`Cube.mandelstamTamm_efficiency`). Réunis : `openCube`.
 
 **Ponts.** Pour `G ≥ 0` et `d ≠ 0`, l'accélération par paires de Qianli Ma a pour norme `G m/‖d‖²`
 (`Bridges.norm_pairGravityAcceleration`) ; en `r₀ = ‖d‖` le champ faible de la source a la pente de
@@ -101,7 +101,7 @@ et, dès `4 × 4 × 4`, `|det Ω| < det Σ` (`Cube.robertson_det_strict`). Dès 
 d'accélération `r_s/(2r₀²)` (`Bridges.equivalence_gttOut`). L'équation d'Einstein vaut avec Clausius
 demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eightPi_lightLike`).
 
-**Clôture.** `properTime_generalRelativity` (le pas, Unruh, Einstein) et `fork_unification` (en plus
+**Clôture.** `properTime_generalRelativity` (le pas, Unruh, Einstein) et `unified_properTime_generalRelativity` (en plus
 `m* c²`, le cube et l'équivalence).
 
 ---
@@ -216,7 +216,7 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`einstein_eightPi`, `properTime_generalRelativity`).  
 `Ric − κ T` s'annule sur le cône de lumière, donc c'est `f g` ; la trace donne `R`, et `R/2 − f` est constante.
 
-### Étape 9 : le cube ouvert NRS³
+### Étape 9 : le cube ouvert
 
 > **Proposition 9.1 (Physlib).** Parmi les six observables `H_k, X_k`, deux observables distinctes commutent si et seulement si elles sont sur des axes différents. Dans tout état, `(b_x b_y b_z)² ≤ det Σ` avec `b_k = ω⟨[H_k, X_k]⟩`. Dans l'état de courant maximal du cube : `det Σ = (C_x C_y C_z)² (b_x b_y b_z)²` ; dès `4 × 4 × 4`, `|det Ω| < det Σ` ; sur chaque axe, `⟨J_k⟩² / (4 Var H_k Var X_k) = 1/C_k²`. Dès `4 × 4 × 4`, `𝒱 = δ(Nx) δ(Ny) δ(Nz) > 0`.
 
@@ -225,7 +225,7 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 </div>
 
 *Modules formels :* [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) (`Cube.axes_commute`, `Cube.pairs_commute_iff`, `Cube.robertson_det`, `Cube.det_cov_maxCurrentCubeState`, `Cube.robertson_det_strict`, `Cube.volQuantum_pos`, `Cube.mandelstamTamm_efficiency`) ;
-[`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`openCubeNRS3`, `fork_unification`).
+[`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`openCube`, `unified_properTime_generalRelativity`).
 
 ### Étape 10 : les ponts avec l'équipe Physlib
 
@@ -314,8 +314,8 @@ dépôt (99 modules, Physlib `3d9ca099`).
 | [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `volQuantum_pos` | quantum volumétrique `𝒱 > 0` | 0 sorry |
 | [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `mandelstamTamm_efficiency` | rapport de Mandelstam–Tamm `1/C_k²` sur chaque axe | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `massAndEquivalence` | Niven, masse, `α_G`, équivalence | 0 sorry |
-| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `openCubeNRS3` | commutation, `𝒱 > 0`, Robertson strict, Mandelstam–Tamm sur les trois axes | 0 sorry |
-| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `fork_unification` | le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein réunis | 0 sorry |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `openCube` | commutation, `𝒱 > 0`, Robertson strict, Mandelstam–Tamm sur les trois axes | 0 sorry |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `unified_properTime_generalRelativity` | le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein réunis | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `acceleratedClock` | temps propre, période `2π/α`, `T = α/2π` | 0 sorry |
 | [`EinsteinEquation.lean`](src/ProperTimeGeneralRelativity/Gravity/EinsteinEquation.lean) | `einstein_equation` | Clausius partout donne Einstein | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `einstein_eightPi` | Einstein avec couplage `8π ℓ²` | 0 sorry |
@@ -326,9 +326,8 @@ dépôt (99 modules, Physlib `3d9ca099`).
 | [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `weakField_eq_neg_gttOut` | `−(1 + 2Φ) = −g_tt` si `r_s = 2GM` (Philippe Kevorkian) | 0 sorry |
 | [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `equivalence_gttOut` | `−g_tt` = référentiel d'accélération `r_s/(2r₀²)` au premier ordre | 0 sorry |
 
-`Unruh.lean`, `Clausius.lean`, `NullForms.lean` et `EinsteinEquation.lean` viennent de
-[`nrs3-tritoro`](https://github.com/naype888-cloud/nrs3-tritoro) (`NRS3Tritoro/Gravity`), copiés
-sans modification sauf le chemin des imports.
+`Unruh.lean`, `Clausius.lean`, `NullForms.lean` et `EinsteinEquation.lean` formalisent la thermodynamique
+de l'espace-temps et la dérivation de l'équation d'Einstein (T. Jacobson, *Phys. Rev. Lett.* 75, 1995, 1260).
 
 ---
 
