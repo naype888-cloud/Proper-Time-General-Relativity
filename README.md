@@ -29,16 +29,16 @@
 > <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_pas.png"><img src="assets/claro/plaque_pas.png" alt="Le temps d'un pas : a sur maxCurrent, où a se simplifie" width="860"></picture>
 > </div>
 >
-> 1. **`a` se simplifie** : `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))`, le même pour tout espacement ; à quatre sites, `τ_pas = 1/(φ|t|)`, `φ = (1 + √5)/2`.
-> 2. **Le temps compte les pas** : `n` pas durent `n · τ_pas` ; aucun état ne parcourt `n` espacements plus vite ; l'état de courant maximal les parcourt exactement en ce temps.
-> 3. **Sans pas, pas de temps** : `n · τ_pas = 0 ⟺ n = 0`.
-> 4. **Lumière ou masse** : l'état de courant maximal sature Robertson–Schrödinger exactement en `N = 2, 3` ; dès `N = 4` son rapport d'incertitude vérifie `1 < C < √(π²/3 − 2)`, et `C → √(π²/3 − 2)` quand `N → ∞` ; en `N = 4`, `C² = (99 − 42√5)/5`, et pour tout `N ≥ 4`, `C² ∈ [(99 − 42√5)/5, π²/3 − 2)`.
-> 5. **Niven** : dès `N = 3`, `cos(π/(N+1))` est irrationnel, donc le pas n'est jamais une fraction rationnelle de `1/|t|`.
-> 6. **Masse effective** : la masse effective de la bande, `m* = 1/E''(0) = 1/(2 t a²)`, a une énergie au repos `m* c² = 2 t cos²(π/(N+1))` où `a` se simplifie encore ; `α_G = G m*²/c > 0`.
-> 7. **Équivalence et `g₀₀`** : dans le référentiel accéléré, `g₀₀ = −(1 + αξ)² = −(1 + 2Φ) − Φ²` avec `Φ = αξ`, et une horloge statique bat à `1 + αξ` ; le champ faible de `Φ = −GM/r` a, en `r₀`, la même pente de `g₀₀` que le référentiel d'accélération `GM/r₀²`.
-> 8. **Einstein** : l'horloge accélérée fixe la température `α/2π`, et la relation de Clausius sur chaque nappe de lumière, avec `η = 1/(4ℓ²)`, donne `Ric − ½ R g + Λ g = 8π ℓ² T`.
-> 9. **Le cube ouvert** : sur le produit de trois chaînes, deux observables distinctes parmi `H_k, X_k` commutent si et seulement si elles sont sur des axes différents ; dès `4 × 4 × 4`, le quantum volumétrique est strictement positif (`𝒱 > 0`) et, dans l'état de courant maximal, Robertson 1934 est strict pour les six observables (`|det Ω| < det Σ`) ; dans cet état, le rapport de Mandelstam–Tamm vaut `1/C²` sur chaque axe. Le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein sont réunis dans `unified_properTime_generalRelativity`.
-> 10. **Les ponts avec l'équipe Physlib** : la norme de l'accélération par paires de Qianli Ma est `G m/‖d‖²`, l'accélération du référentiel de l'étape 7 ; si `r_s = 2GM`, le champ faible `−(1 + 2Φ)` est exactement `−g_tt` de la métrique de Schwarzschild extérieure de Philippe Kevorkian, pour tout `r` ; l'équation d'Einstein de l'étape 8 s'énonce sur les vecteurs de type lumière de Physlib (Matteo Cipollina, Joseph Tooby-Smith).
+> **1 · `a` se simplifie** : `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))`, le même pour tout espacement ; à quatre sites, `τ_pas = 1/(φ|t|)`, `φ = (1 + √5)/2`.
+> **2 · Le temps compte les pas** : `n` pas durent `n · τ_pas` ; aucun état ne parcourt `n` espacements plus vite ; l'état de courant maximal les parcourt exactement en ce temps.
+> **3 · Sans pas, pas de temps** : `n · τ_pas = 0 ⟺ n = 0`.
+> **4 · Lumière ou masse** : l'état de courant maximal sature Robertson–Schrödinger exactement en `N = 2, 3` ; dès `N = 4` son rapport d'incertitude vérifie `1 < C < √(π²/3 − 2)`, et `C → √(π²/3 − 2)` quand `N → ∞` ; en `N = 4`, `C² = (99 − 42√5)/5`, et pour tout `N ≥ 4`, `C² ∈ [(99 − 42√5)/5, π²/3 − 2)`.
+> **5 · Niven** : dès `N = 3`, `cos(π/(N+1))` est irrationnel, donc le pas n'est jamais une fraction rationnelle de `1/|t|`.
+> **6 · Masse effective** : la masse effective de la bande, `m* = 1/E''(0) = 1/(2 t a²)`, a une énergie au repos `m* c² = 2 t cos²(π/(N+1))` où `a` se simplifie encore ; `α_G = G m*²/c > 0`.
+> **7 · Équivalence et `g₀₀`** : dans le référentiel accéléré, `g₀₀ = −(1 + αξ)² = −(1 + 2Φ) − Φ²` avec `Φ = αξ`, et une horloge statique bat à `1 + αξ` ; le champ faible de `Φ = −GM/r` a, en `r₀`, la même pente de `g₀₀` que le référentiel d'accélération `GM/r₀²`.
+> **8 · Einstein** : l'horloge accélérée fixe la température `α/2π`, et la relation de Clausius sur chaque nappe de lumière, avec `η = 1/(4ℓ²)`, donne `Ric − ½ R g + Λ g = 8π ℓ² T`.
+> **9 · Le cube ouvert** : sur le produit de trois chaînes, deux observables distinctes parmi `H_k, X_k` commutent si et seulement si elles sont sur des axes différents ; dès `4 × 4 × 4`, le quantum volumétrique est strictement positif (`𝒱 > 0`) et, dans l'état de courant maximal, Robertson 1934 est strict pour les six observables (`|det Ω| < det Σ`) ; dans cet état, le rapport de Mandelstam–Tamm vaut `1/C²` sur chaque axe. Le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein sont réunis dans `unified_properTime_generalRelativity`.
+> **10 · Les ponts avec l'équipe Physlib** : la norme de l'accélération par paires de Qianli Ma est `G m/‖d‖²`, l'accélération du référentiel de l'étape 7 ; si `r_s = 2GM`, le champ faible `−(1 + 2Φ)` est exactement `−g_tt` de la métrique de Schwarzschild extérieure de Philippe Kevorkian, pour tout `r` ; l'équation d'Einstein de l'étape 8 s'énonce sur les vecteurs de type lumière de Physlib (Matteo Cipollina, Joseph Tooby-Smith).
 
 <div align="center">
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_temps_pas_einstein.png"><img src="assets/claro/plaque_temps_pas_einstein.png" alt="Le temps compte les pas : position, simplification de a, lumière et masse, équation d'Einstein" width="860"></picture>
@@ -333,18 +333,26 @@ de l'espace-temps et la dérivation de l'équation d'Einstein (T. Jacobson, *Phy
 
 ---
 
-## Compilation et certification du noyau
+## 🏛️ La mosaïque
 
-Lean 4 `v4.35.0`. Seule dépendance : Physlib, au commit de fusion de #2096 (`3d9ca099`).
-
-```bash
-lake exe cache get
-lake build
-lake env lean Verification/Axioms.lean
-# 'ProperTimeGR.properTime_generalRelativity' depends on axioms: [propext, Classical.choice, Quot.sound]
-```
-
-0 sorry, aucun axiome ad hoc, `autoImplicit = false`.
+| Dépôt | Objet |
+|:---|:---|
+| [`00 · bacqm-substrate`](https://github.com/naype888-cloud/bacqm-systems) | Substrat matériel & moteur du noyau Linux : modules de mémoire dynamiques en temps réel |
+| [`01 · nava-robertson-schrodinger`](https://github.com/naype888-cloud/nava-robertson-schrodinger) | Le canon : l'incertitude élémentaire dimensionnelle sur le cube ouvert, ℂᵈ ⊗ ℂᵈ ⊗ ℂᵈ |
+| [**02 · Proper-Time-General-Relativity**](https://github.com/naype888-cloud/Proper-Time-General-Relativity) | Le temps compte les pas : τ = 1/(φ|t|) à quatre sites ; masse effective, équivalence, gravitation *(ce dépôt)* |
+| [`03 · nrs3-mandelstam-tamm-cramer-rao`](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao) | Mandelstam–Tamm et Cramér–Rao : aucun état n'est orthogonal à lui-même avant πħ/(2ΔE) |
+| [`04 · YM-By-Perelmans-surgery-method`](https://github.com/naype888-cloud/YM-By-Perelmans-surgery-method) | Yang–Mills sur réseau : loi d'aire uniforme, matrice de transfert, défaut de fibre (0 sorry) |
+| [`05 · nrs3-tightbinding`](https://github.com/naype888-cloud/nrs3-tightbinding) | La chaîne de Physlib, le cube ouvert et la table périodique (H–Og), un cube 3D par élément |
+| [`06 · nrs3-cristales`](https://github.com/naype888-cloud/nrs3-cristales) | Cristaux : la symétrie donne la forme de Σ et Ω, le spectre donne la taille |
+| [`07 · nrs3-completude`](https://github.com/naype888-cloud/nrs3-completude) | Complétude constructive et limites spectrales par Robertson–Fiedler–Niven–Szegő |
+| [`08 · nrs3-golab`](https://github.com/naype888-cloud/nrs3-golab) | Gołąb, les deux extrêmes : π = 3 (hexagone), 4 (carré) ; produit scalaire → π exact ; stabilité en d = 3 |
+| [`09 · nrs3-de-sitter`](https://github.com/naype888-cloud/nrs3-de-sitter) | Cosmologie de Sitter : rayon d'horizon L_dS, constante cosmologique positive et courbure |
+| [`10 · nrs3-bekenstein`](https://github.com/naype888-cloud/nrs3-bekenstein) | Thermodynamique des trous noirs : frontière à bits, entropie de Bekenstein–Hawking saturée |
+| [`11 · nrs3-landauer-carnot`](https://github.com/naype888-cloud/nrs3-landauer-carnot) | Limite de Landauer et cycle de Carnot : coût d'effacement d'un bit et dissipation minimale |
+| [`12 · nrs3-penrose`](https://github.com/naype888-cloud/nrs3-penrose) | Effondrement gravitationnel de Diósi–Penrose : temps de décohérence par auto-énergie |
+| [`13 · nrs3-rovelli-lqg`](https://github.com/naype888-cloud/nrs3-rovelli-lqg) | Gravité quantique à boucles : spectre d'aire discrète, opérateur de surface et saturation de spin |
+| [`14 · nrs3-uncertainty-cone`](https://github.com/naype888-cloud/nrs3-uncertainty-cone) | Cône de lumière futur et cercle de Minkowski : structure causale sous revêtement SL(2, ℂ) |
+| [`15 · lean4-commits`](https://github.com/naype888-cloud/lean4-commits) | 53 PRs fusionnées dans leanprover-community/physlib : catalogue de preuves formelles, 0 sorry, ZFC |
 
 ---
 
@@ -358,18 +366,20 @@ lake env lean Verification/Axioms.lean
 | 1945 | Mandelstam et Tamm : la relation temps–énergie | [`nrs3-mandelstam-tamm-cramer-rao`](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao) |
 | 1976 | Unruh : la température de l'observateur accéléré | **ce dépôt** |
 | 1995 | Jacobson : l'équation d'Einstein depuis la relation de Clausius | **ce dépôt** · [`nrs3-tritoro`](https://github.com/naype888-cloud/nrs3-tritoro) |
-
 ---
 
-## La mosaïque des dépôts RS^N³
+## Compilation et certification du noyau
 
-- [RS^N et RS^N³ — Le théorème de base](https://github.com/naype888-cloud/nava-robertson-schrodinger)
-- [RS^N³ · Tritoro](https://github.com/naype888-cloud/nrs3-tritoro)
-- [RS^N³ · Mandelstam–Tamm et Cramér–Rao](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao)
-- [RS^N³ · Bekenstein — Bits on the Boundary](https://github.com/naype888-cloud/nrs3-bekenstein)
-- [La chaîne close](https://github.com/naype888-cloud/nrs3-completude)
-- **[Le temps compte les pas](https://github.com/naype888-cloud/Proper-Time-General-Relativity)** (ce dépôt)
+Lean 4 `v4.35.0`. Seule dépendance : Physlib, au commit de fusion de #2096 (`3d9ca099`).
 
+```bash
+lake exe cache get
+lake build
+lake env lean Verification/Axioms.lean
+# 'ProperTimeGR.properTime_generalRelativity' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+0 sorry, aucun axiome ad hoc, `autoImplicit = false`.
 ---
 
 ## Licence
