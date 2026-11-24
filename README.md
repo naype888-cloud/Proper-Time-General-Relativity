@@ -1,3 +1,5 @@
+<div lang="fr">
+
 <div align="center">
 
 # Le temps compte les pas
@@ -381,5 +383,8 @@ NRS Noncommercial License 1.0.0, voir [`LICENSE`](LICENSE).
 ### 📐 *« L'espacement se simplifie ; il reste les pas, et sans pas il n'y a pas de temps. »*
 
 **Eduardo Nava Hernández · José Arturo Nava Hernández** · [naype888-cloud](https://github.com/naype888-cloud)
+
+</div>
+
 
 </div>
