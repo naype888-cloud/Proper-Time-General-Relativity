@@ -80,7 +80,7 @@ intervalle `−(1 + αξ)² dη² + dξ²` (`Frame.metric`) et coïncide en `ξ 
 du référentiel d'accélération `GM/r₀²` (`Frame.equivalence`). Réunis : `massAndEquivalence`.
 
 **Horloge accélérée et Einstein.** La ligne d'univers de Rindler d'accélération `α` est paramétrée
-par le temps propre, de période imaginaire minimale `2π/α` et de température `α/2π`
+par le temps propre relativiste, de période imaginaire minimale `2π/α` et de température `α/2π`
 (`acceleratedClock`). Clausius sur chaque nappe de lumière avec `η = 1/(4ℓ²)`, et `∇f = ½ ∇R`,
 donnent l'équation d'Einstein de couplage `8π ℓ²` (`einstein_eightPi`).
 
@@ -182,7 +182,7 @@ La masse vient de la courbure de la bande de Physlib : aucune constante n'est ch
 > `ẍ² − ẗ² = α²`, a pour plus courte période imaginaire `2π/α`, et `T · 2π/α = 1`.
 
 <div align="center">
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_etape4_horloge.png"><img src="assets/claro/plaque_etape4_horloge.png" alt="Ligne d'univers de Rindler, temps propre, accélération, période imaginaire, température d'Unruh" width="860"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_etape4_horloge.png"><img src="assets/claro/plaque_etape4_horloge.png" alt="Ligne d'univers de Rindler, temps propre relativiste, accélération, période imaginaire, température d'Unruh" width="860"></picture>
 </div>
 
 *Modules formels :* [`Unruh.lean`](src/ProperTimeGeneralRelativity/Gravity/Unruh.lean) (`velocity_norm`, `acceleration_norm`, `periodic_two_pi`, `period_ge`, `unruhTemperature_mul_period`) ;
@@ -316,7 +316,7 @@ dépôt (99 modules, Physlib `3d9ca099`).
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `massAndEquivalence` | Niven, masse, `α_G`, équivalence | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `openCube` | commutation, `𝒱 > 0`, Robertson strict, Mandelstam–Tamm sur les trois axes | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `unified_properTime_generalRelativity` | le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein réunis | 0 sorry |
-| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `acceleratedClock` | temps propre, période `2π/α`, `T = α/2π` | 0 sorry |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `acceleratedClock` | temps propre relativiste, période `2π/α`, `T = α/2π` | 0 sorry |
 | [`EinsteinEquation.lean`](src/ProperTimeGeneralRelativity/Gravity/EinsteinEquation.lean) | `einstein_equation` | Clausius partout donne Einstein | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `einstein_eightPi` | Einstein avec couplage `8π ℓ²` | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `properTime_generalRelativity` | le pas, Unruh et Einstein réunis | 0 sorry |
