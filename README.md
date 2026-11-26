@@ -274,20 +274,25 @@ Les noms actuels des déclarations viennent du [renommage de Joseph Tooby-Smith]
 
 ## L'équipe Physlib sur laquelle reposent les preuves
 
-Liste tirée de l'en-tête `Authors` de chaque fichier de Physlib importé, directement ou non, par ce
-dépôt (99 modules, Physlib `3d9ca099`).
+Liste complète tirée de l'en-tête `Authors` de chaque fichier de Physlib importé, directement ou transitivement, par ce dépôt (**130 modules**, Physlib `3d9ca099e`), ordonnée des fondations mathématiques jusqu'aux ponts finaux :
 
-| Auteur | Fichiers de Physlib utilisés | Rôle ici | Étapes |
-|---|---|---|---|
-| Joseph Tooby-Smith | [`TightBindingChain/Basic.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/CondensedMatter/TightBindingChain/Basic.lean), vecteurs et tenseurs de Lorentz, [`MinkowskiProduct.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/Relativity/Tensors/RealTensor/Vector/MinkowskiProduct.lean) (42 modules) | la chaîne, sa bande `E(k)`, le produit de Minkowski | 1, 5, 8, 10 |
-| Tom Ole Diem | [`ProbabilisticTheory/State/Basic.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/ProbabilisticTheory/State/Basic.lean), observables, statistiques, GNS (13 modules) | les états, l'espérance, la variance de toutes les incertitudes | 2, 4, 9 |
-| David Gross | [`HilbertSpace/State/Vector.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/ProbabilisticTheory/HilbertSpace/State/Vector.lean) (3 modules) | les états vectoriels, dont l'état de courant maximal | 2, 4, 9 |
-| Matteo Cipollina | [`Causality/LightLike.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/Relativity/Causality/LightLike.lean), `MinkowskiProduct.lean` (5 modules) | les vecteurs de type lumière, le produit de Minkowski | 8, 10 |
-| Andrea Pari, Robert Sneiderman, Gregory J. Loges | contractions de tenseurs, Levi-Civita, delta de Kronecker (15 modules) | sous les vecteurs de Lorentz | 8 |
-| Raunak Chhatwal | [`ReferenceFrame.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/SpaceAndTime/ReferenceFrame.lean), particules ponctuelles (4 modules) | le référentiel et les particules de la gravitation par paires | 10 |
-| Qianli Ma | [`NewtonianGravity.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/ClassicalMechanics/OrbitalMechanics/NewtonianGravity.lean) | l'accélération par paires | 10 |
-| Philippe Kevorkian | [`IncompressibleSphere.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/Relativity/General/Schwarzschild/IncompressibleSphere.lean) | la métrique de Schwarzschild extérieure | 10 |
-| Eduardo Nava-Hernandez | chaîne ouverte, courant, état de courant maximal, cube (23 modules) | la limite de vitesse, la saturation, le cube | 1–4, 9 |
+| Couche / Ordre | Auteur | Fichiers de Physlib utilisés | Rôle dans la chaîne | Étapes |
+|---|---|---|---|---|
+| 1 · Unités & intégration | **Art Mountain** | `Mathematics/ForMathlib/Integration/Basic.lean` (1 module) | outils d'intégration sous-jacents | 1, 8 |
+| 1 · Unités & intégration | **Hirotaka Monya** *(avec J. Tooby-Smith)* | `Units/PositiveRealUnit.lean` (1 module) | unités réelles positives | 1, 5, 10 |
+| 2 · Tenseurs & algèbre | **Gregory J. Loges** | [`KroneckerDelta/Basic.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/Mathematics/KroneckerDelta/Basic.lean) (1 module) | delta de Kronecker des indices tensoriels | 8 |
+| 2 · Tenseurs & algèbre | **Robert Sneiderman** | [`LeviCivita/Basic.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/Mathematics/LeviCivita/Basic.lean), `Metrics/Basic.lean`, contractions (5 modules) | symbole de Levi-Civita, métrique et contractions | 8 |
+| 2 · Tenseurs & algèbre | **Andrea Pari** | `SesquilinearForm.lean`, `Contraction/*`, `ComponentIdx/*` (10 modules) | formes sesquilinéaires et contractions de tenseurs | 8 |
+| 3 · Espace & géométrie | **Shaopeng Zhu** | `EuclideanGroup/*`, `Space/Origin.lean` *(avec J. Tooby-Smith)* (4 modules) | groupe euclidien et origine de l'espace | 1, 10 |
+| 3 · Espace & géométrie | **Raunak Chhatwal** | [`ReferenceFrame.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/SpaceAndTime/ReferenceFrame.lean), `PointParticle/*`, `Force.lean` (5 modules) | référentiel et particules de la gravitation par paires | 10 |
+| 4 · Relativité & causalité | **Samyak Rai** *(avec J. Tooby-Smith)* | [`SpeedOfLight.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/Relativity/SpeedOfLight.lean) (1 module) | vitesse de la lumière et unités relativistes | 6, 7, 10 |
+| 4 · Relativité & causalité | **Matteo Cipollina** *(avec J. Tooby-Smith)* | [`Causality/LightLike.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/Relativity/Causality/LightLike.lean), [`ProperTime.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/Relativity/Special/ProperTime.lean), [`MinkowskiProduct.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/Relativity/Tensors/RealTensor/Vector/MinkowskiProduct.lean) (7 modules) | vecteurs de type lumière, temps propre, produit de Minkowski | 6, 8, 10 |
+| 5 · États & incertitudes | **David Gross** | [`HilbertSpace/State/Vector.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/ProbabilisticTheory/HilbertSpace/State/Vector.lean), `StarAlgebra/Restrict`, `SelfAdjoint` (3 modules) | états vectoriels, dont l'état de courant maximal | 2, 4, 9 |
+| 5 · États & incertitudes | **Tom Ole Diem** | [`ProbabilisticTheory/State/Basic.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/ProbabilisticTheory/State/Basic.lean), `Statistics`, `GNS`, [`Uncertainty.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/ProbabilisticTheory/CStarAlgebra/Uncertainty.lean) (13 modules) | états algébriques, espérance, variance et inégalité de Robertson–Schrödinger | 2, 4, 9 |
+| 6 · Chaîne & Lorentz | **Joseph Tooby-Smith** | [`TightBindingChain/Basic.lean`](https://github.com/leanprover-community/physlib/blob/master/Physlib/CondensedMatter/TightBindingChain/Basic.lean), `LorentzGroup/*`, `MinkowskiProduct.lean`, `LightLike.lean` (68 modules) | la chaîne périodique, sa bande `E(k)`, groupe de Lorentz et Minkowski | 1, 5, 6, 8, 10 |
+| 7 · Gravitation (ponts) | **Qianli Ma** | [`NewtonianGravity.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/ClassicalMechanics/OrbitalMechanics/NewtonianGravity.lean) (1 module) | accélération gravitationnelle par paires | 10 |
+| 7 · Gravitation (ponts) | **Philippe Kevorkian** | [`IncompressibleSphere.lean`](https://github.com/leanprover-community/physlib/blob/master/PhyslibAlpha/Relativity/General/Schwarzschild/IncompressibleSphere.lean) (1 module) | métrique de Schwarzschild extérieure (`g_tt = 1 − r_s/r`) | 10 |
+| 8 · Clôture chaîne & cube | **Eduardo Nava-Hernandez** | `TightBindingChain/Open/*`, `Current/*`, `MaxCurrentState/*`, `Cube/*`, `Uncertainty.lean` (23 modules) | chaîne ouverte, limite de vitesse, saturation `N = 2, 3`, cube ouvert | 1–4, 9 |
 
 ---
 
