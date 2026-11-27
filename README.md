@@ -5,7 +5,7 @@
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/titre_temps_propre.png"><img src="assets/claro/titre_temps_propre.png" alt="Du temps propre relativiste, et de ses conséquences générales" width="860"></picture>
 **"Du temps propre relativiste et de ses conséquences générales"**
 
-### Sur la chaîne à liaisons fortes de Physlib (de pas `a`), le facteur `a` s'élimine : un pas dure `1 / (2|t| cos(π/(N+1)))`, `n` pas durent `n` fois plus longtemps, et sans pas il n'y a pas de temps
+### Sur la chaîne à liaisons fortes de Physlib (de pas a), le facteur a s'élimine : un pas dure `1 / (2|t| cos(π/(N+1)))`, n pas durent n fois plus longtemps, et sans pas il n'y a pas de temps
 
 **Eduardo Nava Hernández · José Arturo Nava Hernández**  
 *Dépôt 30 · vérification formelle en Lean 4 · `0 sorry` · sur Physlib*
@@ -23,24 +23,24 @@
 >
 > Le modèle commence là où il y a de la masse ; ce qui restait à fixer, c'est le temps. Sur la
 > chaîne ouverte, la position est `X = Σ a n |n⟩⟨n|` et le hamiltonien est le saut du graphe
-> chemin, `H = E₀ I − t A(P_N)` (Physlib #2096). L'espacement `a` n'entre que par `X`, donc le
-> courant porte un facteur `a` et aucun état ne dépasse `maxCurrent = 2|a t| cos(π/(N+1))`. Un pas,
-> un espacement à la vitesse limite, dure donc un temps où `a` s'élimine.
+> chemin, `H = E₀ I − t A(P_N)` (Physlib #2096). L'espacement a n'entre que par X, donc le
+> courant porte un facteur a et aucun état ne dépasse `maxCurrent = 2|a t| cos(π/(N+1))`. Un pas,
+> un espacement à la vitesse limite, dure donc un temps où a s'élimine.
 >
 > <div align="center">
 > <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_pas.png"><img src="assets/claro/plaque_pas.png" alt="Le temps d'un pas : a sur maxCurrent, où a s'élimine" width="860"></picture>
 > </div>
 >
-> **1 · `a` s'élimine** : `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))`, le même pour tout espacement ; à quatre sites, `τ_pas = 1/(φ|t|)`, `φ = (1 + √5)/2`.
-> **2 · Le temps compte les pas** : `n` pas durent `n · τ_pas` ; aucun état ne parcourt `n` espacements plus vite ; l'état de courant maximal les parcourt exactement en ce temps.
-> **3 · Sans pas, pas de temps** : `n · τ_pas = 0 ⟺ n = 0`.
-> **4 · Lumière ou masse** : l'état de courant maximal sature Robertson–Schrödinger exactement en `N = 2, 3` ; dès `N = 4` son rapport d'incertitude vérifie `1 < C < √(π²/3 − 2)`, et `C → √(π²/3 − 2)` quand `N → ∞` ; en `N = 4`, `C² = (99 − 42√5)/5`, et pour tout `N ≥ 4`, `C² ∈ [(99 − 42√5)/5, π²/3 − 2)`.
+> **1 · a s'élimine** : `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))`, le même pour tout espacement ; à quatre sites, `τ_pas = 1/(φ|t|)`, `φ = (1 + √5)/2`.
+> **2 · Le temps compte les pas** : n pas durent `n · τ_pas` ; aucun état ne parcourt n espacements plus vite ; l'état de courant maximal les parcourt exactement en ce temps.
+> **3 · Sans pas, pas de temps** : n · τ_pas = 0 ⟺ n = 0.
+> **4 · Lumière ou masse** : l'état de courant maximal sature Robertson–Schrödinger exactement en `N = 2, 3` ; dès `N = 4` son rapport d'incertitude vérifie `1 < C < √(π²/3 − 2)`, et C → √(π²/3 − 2) quand N → ∞ ; en `N = 4`, `C² = (99 − 42√5)/5`, et pour tout N ≥ 4, C² ∈ [(99 − 42√5)/5, π²/3 − 2).
 > **5 · Niven** : dès `N = 3`, `cos(π/(N+1))` est irrationnel, donc le pas n'est jamais une fraction rationnelle de `1/|t|`.
-> **6 · Masse effective** : la masse effective de la bande, `m* = 1/E''(0) = 1/(2 t a²)`, a une énergie au repos `m* c² = 2 t cos²(π/(N+1))` où `a` s'élimine encore ; `α_G = G m*²/c > 0`.
+> **6 · Masse effective** : la masse effective de la bande, `m* = 1/E''(0) = 1/(2 t a²)`, a une énergie au repos `m* c² = 2 t cos²(π/(N+1))` où a s'élimine encore ; `α_G = G m*²/c > 0`.
 > **7 · Équivalence et `g₀₀`** : dans le référentiel accéléré, `g₀₀ = −(1 + αξ)² = −(1 + 2Φ) − Φ²` avec `Φ = αξ`, et une horloge statique bat à `1 + αξ` ; le champ faible de `Φ = −GM/r` a, en `r₀`, la même pente de `g₀₀` que le référentiel d'accélération `GM/r₀²`.
 > **8 · Einstein** : l'horloge accélérée fixe la température `α/2π`, et la relation de Clausius sur chaque nappe de lumière, avec `η = 1/(4ℓ²)`, donne `Ric − ½ R g + Λ g = 8π ℓ² T`.
 > **9 · Le cube ouvert** : sur le produit de trois chaînes, deux observables distinctes parmi `H_k, X_k` commutent si et seulement si elles sont sur des axes différents ; dès `4 × 4 × 4`, le quantum volumétrique est strictement positif (`𝒱 > 0`) et, dans l'état de courant maximal, Robertson 1934 est strict pour les six observables (`|det Ω| < det Σ`) ; dans cet état, le rapport de Mandelstam–Tamm vaut `1/C²` sur chaque axe. Le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein sont réunis dans `unified_properTime_generalRelativity`.
-> **10 · Les ponts avec l'équipe Physlib** : la norme de l'accélération par paires de Qianli Ma est `G m/‖d‖²`, l'accélération du référentiel de l'étape 7 ; si `r_s = 2GM`, le champ faible `−(1 + 2Φ)` est exactement `−g_tt` de la métrique de Schwarzschild extérieure de Philippe Kevorkian, pour tout `r` ; l'équation d'Einstein de l'étape 8 s'énonce sur les vecteurs de type lumière de Physlib (Matteo Cipollina, Joseph Tooby-Smith).
+> **10 · Les ponts avec l'équipe Physlib** : la norme de l'accélération par paires de Qianli Ma est `G m/‖d‖²`, l'accélération du référentiel de l'étape 7 ; si `r_s = 2GM`, le champ faible `−(1 + 2Φ)` est exactement `−g_tt` de la métrique de Schwarzschild extérieure de Philippe Kevorkian, pour tout r ; l'équation d'Einstein de l'étape 8 s'énonce sur les vecteurs de type lumière de Physlib (Matteo Cipollina, Joseph Tooby-Smith).
 
 <div align="center">
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_temps_pas_einstein.png"><img src="assets/claro/plaque_temps_pas_einstein.png" alt="Le temps compte les pas : position, simplification de a, lumière et masse, équation d'Einstein" width="860"></picture>
@@ -51,23 +51,23 @@
 ## Résumé formel
 
 **Le pas.** `stepTime T = a / maxCurrent`, et `stepTime_eq` : il vaut `1 / (2|t| cos(π/(N+1)))`.
-Deux chaînes avec le même `N` et le même `t` ont le même pas, quel que soit leur espacement
-(`stepTime_eq_of_eq`) ; il est strictement positif pour `t ≠ 0`, `N ≥ 2` (`stepTime_pos`). À quatre sites, `cos(π/5) = φ/2` et
+Deux chaînes avec le même N et le même t ont le même pas, quel que soit leur espacement
+(`stepTime_eq_of_eq`) ; il est strictement positif pour t ≠ 0, N ≥ 2 (`stepTime_pos`). À quatre sites, `cos(π/5) = φ/2` et
 `τ_pas = 1/(φ|t|)` (`stepTime_of_N_eq_four`).
 
-**Le temps de `n` pas.** `elapsed T n = n · stepTime T`. Il est nul exactement quand `n = 0`
-(`elapsed_eq_zero_iff`). Pour tout état de courant non nul, parcourir `n` espacements prend au
+**Le temps de n pas.** `elapsed T n = n · stepTime T`. Il est nul exactement quand `n = 0`
+(`elapsed_eq_zero_iff`). Pour tout état de courant non nul, parcourir n espacements prend au
 moins `elapsed T n` (`elapsed_le_travelTime`), et l'état de courant maximal le fait exactement
 en ce temps (`elapsed_eq_travelTime_maxCurrentState`).
 
 **Lumière ou masse.** Le défaut de Gram de l'état de courant maximal est nul exactement en
 `N = 2, 3`, et dès `N = 4` le rapport d'incertitude est strictement entre `1` et `√(π²/3 − 2)`.
-Avec ce qui précède : `timeCountsSteps`. Quand `N → ∞`, `C → √(π²/3 − 2)`
+Avec ce qui précède : `timeCountsSteps`. Quand N → ∞, C → √(π²/3 − 2)
 (`tendsto_uncertaintyRatio_longChain`). En `N = 4`, `C² = (99 − 42√5)/5`
-(`uncertaintyRatio_sq_of_N_eq_four`), et pour tout `N ≥ 4`, `C² ∈ [(99 − 42√5)/5, π²/3 − 2)`
+(`uncertaintyRatio_sq_of_N_eq_four`), et pour tout N ≥ 4, C² ∈ [(99 − 42√5)/5, π²/3 − 2)
 (`uncertaintyRatio_sq_mem_Ico`).
 
-**Niven.** `cos(π/(N+1)) ∉ ℚ` pour `N ≥ 3` (`cos_pi_div_succ_irrational`, sur le théorème de
+**Niven.** `cos(π/(N+1)) ∉ ℚ` pour N ≥ 3 (`cos_pi_div_succ_irrational`, sur le théorème de
 Niven de Mathlib), donc `2|t| τ_pas ∉ ℚ` (`stepTime_irrational`) ; en `N = 2`, `2|t| τ_pas = 2`
 (`stepTime_two`).
 
@@ -80,7 +80,7 @@ Niven de Mathlib), donc `2|t| τ_pas ∉ ℚ` (`stepTime_irrational`) ; en `N = 
 **Équivalence.** Le référentiel accéléré `t = (1/α + ξ) sinh αη`, `x = (1/α + ξ) cosh αη` a pour
 intervalle `−(1 + αξ)² dη² + dξ²` (`Frame.metric`) et coïncide en `ξ = 0` avec la ligne de Rindler
 (`Frame.time_zero`, `Frame.space_zero`). `g₀₀ = −(1 + 2Φ) − Φ²` (`Frame.g00_eq_weakField`),
-`√(−g₀₀) = 1 + αξ` pour `1 + αξ ≥ 0` (`Frame.clockRate`), et le champ faible de `−GM/r` a en `r₀` la pente de `g₀₀`
+`√(−g₀₀) = 1 + αξ` pour 1 + αξ ≥ 0 (`Frame.clockRate`), et le champ faible de `−GM/r` a en `r₀` la pente de `g₀₀`
 du référentiel d'accélération `GM/r₀²` (`Frame.equivalence`). Réunis : `massAndEquivalence`.
 
 **Horloge accélérée et Einstein.** La ligne d'univers de Rindler d'accélération `α` est paramétrée
@@ -91,19 +91,19 @@ donnent l'équation d'Einstein de couplage `8π ℓ²` (`einstein_eightPi`).
 **Le cube ouvert.** Sur le cube `Tx × Ty × Tz`, les observables d'axes différents commutent
 (`Cube.axes_commute`) ; parmi les six observables `H_k, X_k`, deux observables distinctes
 commutent si et seulement si elles sont sur des axes différents (`Cube.pairs_commute_iff`). Dans
-tout état, `(b_x b_y b_z)² ≤ det Σ` avec `b_k = ω⟨[H_k, X_k]⟩` (`Cube.robertson_det`) ; dans l'état
+tout état, (b_x b_y b_z)² ≤ det Σ avec `b_k = ω⟨[H_k, X_k]⟩` (`Cube.robertson_det`) ; dans l'état
 de courant maximal, `det Σ = (C_x C_y C_z)² (b_x b_y b_z)²` (`Cube.det_cov_maxCurrentCubeState`)
 et, dès `4 × 4 × 4`, `|det Ω| < det Σ` (`Cube.robertson_det_strict`). Dès `4 × 4 × 4`, `𝒱 > 0`
 (`Cube.volQuantum_pos`) ; dans l'état de courant maximal, le rapport de Mandelstam–Tamm vaut
 `1/C_k²` sur chaque axe (`Cube.mandelstamTamm_efficiency`). Réunis : `openCube`.
 
-**Ponts.** Pour `G ≥ 0` et `d ≠ 0`, l'accélération par paires de Qianli Ma a pour norme `G m/‖d‖²`
+**Ponts.** Pour G ≥ 0 et d ≠ 0, l'accélération par paires de Qianli Ma a pour norme `G m/‖d‖²`
 (`Bridges.norm_pairGravityAcceleration`) ; en `r₀ = ‖d‖` le champ faible de la source a la pente de
 `g₀₀` du référentiel accéléré de cette norme (`Bridges.equivalence_pairGravity`). Si `r_s = 2GM`,
 `−(1 + 2Φ(r)) = −g_tt(r)` avec le `g_tt = 1 − r_s/r` de Philippe Kevorkian
-(`Bridges.weakField_eq_neg_gttOut`), et en `r₀ ≠ 0`, `−g_tt` a la pente de `g₀₀` du référentiel
+(`Bridges.weakField_eq_neg_gttOut`), et en r₀ ≠ 0, `−g_tt` a la pente de `g₀₀` du référentiel
 d'accélération `r_s/(2r₀²)` (`Bridges.equivalence_gttOut`). L'équation d'Einstein vaut avec Clausius
-demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eightPi_lightLike`).
+demandé sur les vecteurs k de caractère causal « lumière » (`einstein_eightPi_lightLike`).
 
 **Clôture.** `properTime_generalRelativity` (le pas, Unruh, Einstein) et `unified_properTime_generalRelativity` (en plus
 `m* c²`, le cube et l'équivalence).
@@ -126,12 +126,12 @@ demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eig
 </div>
 
 *Modules formels :* Physlib `PhyslibAlpha/CondensedMatter/TightBindingChain` : `Open/Basic.lean` (#2096) et `Current/SpeedLimit.lean` (#1724).  
-`maxCurrent` est la plus grande valeur propre du courant `J` : la borne est exacte, atteinte par l'état de courant maximal.
+`maxCurrent` est la plus grande valeur propre du courant J : la borne est exacte, atteinte par l'état de courant maximal.
 
-### Étape 2 : `a` s'élimine, le temps compte les pas
+### Étape 2 : a s'élimine, le temps compte les pas
 
 > **Théorème 2.1.** `τ_pas = a / maxCurrent = 1 / (2|t| cos(π/(N+1)))` ; `t_n = n τ_pas` ;
-> `t_n ≤ n a / |⟨J⟩_ω|` pour tout état de courant non nul ; égalité pour l'état de courant maximal ; `t_n = 0 ⟺ n = 0`.
+> t_n ≤ n a / |⟨J⟩_ω| pour tout état de courant non nul ; égalité pour l'état de courant maximal ; t_n = 0 ⟺ n = 0.
 > À quatre sites, `τ_pas = 1/(φ|t|)`.
 
 <div align="center">
@@ -143,7 +143,7 @@ demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eig
 
 ### Étape 3 : Niven — le pas n'est jamais rationnel dès `N = 3`
 
-> **Théorème 3.1.** Pour `N ≥ 3`, `cos(π/(N+1)) ∉ ℚ`, donc `2|t| τ_pas = 1/cos(π/(N+1)) ∉ ℚ` ;
+> **Théorème 3.1.** Pour N ≥ 3, `cos(π/(N+1)) ∉ ℚ`, donc `2|t| τ_pas = 1/cos(π/(N+1)) ∉ ℚ` ;
 > en `N = 2`, `2|t| τ_pas = 2`.
 
 <div align="center">
@@ -151,14 +151,14 @@ demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eig
 </div>
 
 *Modules formels :* [`Niven.lean`](src/ProperTimeGeneralRelativity/Niven.lean) (`cos_pi_div_succ_irrational`, `stepTime_irrational`, `stepTime_two`).  
-Niven (Mathlib) : en `0 ≤ r ≤ 1`, `cos(rπ) ∈ ℚ` force `r ∈ {0, 1/3, 1/2, 2/3, 1}` ; `1/(N+1) ≤ 1/4` n'y est pas.
+Niven (Mathlib) : en 0 ≤ r ≤ 1, cos(rπ) ∈ ℚ force r ∈ {0, 1/3, 1/2, 2/3, 1} ; 1/(N+1) ≤ 1/4 n'y est pas.
 
 ### Étape 4 : lumière en `N = 2, 3`, masse dès `N = 4`
 
 > **Proposition 4.1 (Physlib).** L'état de courant maximal sature Robertson–Schrödinger exactement
-> en `N = 2, 3` ; dès `N = 4`, `1 < C < √(π²/3 − 2)` ; et `C → √(π²/3 − 2)` quand `N → ∞`.
+> en `N = 2, 3` ; dès `N = 4`, `1 < C < √(π²/3 − 2)` ; et C → √(π²/3 − 2) quand N → ∞.
 >
-> **Théorème 4.2.** En `N = 4`, `C² = (99 − 42√5)/5` ; pour tout `N ≥ 4`, `C² ∈ [(99 − 42√5)/5, π²/3 − 2)`, uniformément en `N`.
+> **Théorème 4.2.** En `N = 4`, `C² = (99 − 42√5)/5` ; pour tout N ≥ 4, C² ∈ [(99 − 42√5)/5, π²/3 − 2), uniformément en N.
 
 <div align="center">
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_etape3_lumiere_masse.png"><img src="assets/claro/plaque_etape3_lumiere_masse.png" alt="Saturation exactement en N = 2, 3 ; rapport d'incertitude strictement entre 1 et la limite de Szegő" width="860"></picture>
@@ -168,7 +168,7 @@ Niven (Mathlib) : en `0 ≤ r ≤ 1`, `cos(rπ) ∈ ℚ` force `r ∈ {0, 1/3, 1
 *Module formel du cadre :* [`FourSites.lean`](src/ProperTimeGeneralRelativity/FourSites.lean) (`uncertaintyRatioSqForm_five`, `uncertaintyRatio_sq_of_N_eq_four`, `uncertaintyRatio_sq_mem_Ico`).  
 La forme close de `C²` en `n = 5` avec `cos(π/5) = (1 + √5)/4`, puis la monotonie (#1735) et la borne de Szegő (#1734).
 
-### Étape 5 : la masse effective ; `a` s'élimine dans `m* c²`
+### Étape 5 : la masse effective ; a s'élimine dans `m* c²`
 
 > **Théorème 5.1.** `E''(0) = 2 t a²`, `m* = 1/(2 t a²)` ; avec `c = maxCurrent`,
 > `m* c² = 2 t cos²(π/(N+1))`, `m* c² τ_pas = cos(π/(N+1))`, et `α_G = G m*²/c > 0` (`ħ = 1`).
@@ -191,12 +191,12 @@ La masse vient de la courbure de la bande de Physlib : aucune constante n'est ch
 
 *Modules formels :* [`Unruh.lean`](src/ProperTimeGeneralRelativity/Gravity/Unruh.lean) (`velocity_norm`, `acceleration_norm`, `periodic_two_pi`, `period_ge`, `unruhTemperature_mul_period`) ;
 [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`acceleratedClock`).  
-Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien avec l'espacement de la chaîne.
+Dans le code Lean l'accélération s'appelle a (`Rindler.time a`), sans lien avec l'espacement de la chaîne.
 
 ### Étape 7 : le référentiel accéléré, `g₀₀` et l'équivalence
 
 > **Théorème 7.1.** Dans le référentiel `t = (1/α + ξ) sinh αη`, `x = (1/α + ξ) cosh αη`,
-> `−dt² + dx² = −(1 + αξ)² dη² + dξ²` ; `g₀₀ = −(1 + 2Φ) − Φ²` avec `Φ = αξ` ; `√(−g₀₀) = 1 + αξ` pour `1 + αξ ≥ 0`.
+> `−dt² + dx² = −(1 + αξ)² dη² + dξ²` ; `g₀₀ = −(1 + 2Φ) − Φ²` avec `Φ = αξ` ; `√(−g₀₀) = 1 + αξ` pour 1 + αξ ≥ 0.
 > Pour `Φ(r) = −GM/r`, la pente de `−(1 + 2Φ)` en `r₀` est celle de `g₀₀` du référentiel d'accélération `GM/r₀²`.
 
 <div align="center">
@@ -218,11 +218,11 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 *Modules formels :* [`Clausius.lean`](src/ProperTimeGeneralRelativity/Gravity/Clausius.lean) (`clausius_iff`, `eight_pi`) ;
 [`EinsteinEquation.lean`](src/ProperTimeGeneralRelativity/Gravity/EinsteinEquation.lean) (`einstein_equation`) ;
 [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) (`einstein_eightPi`, `properTime_generalRelativity`).  
-`Ric − κ T` s'annule sur le cône de lumière, donc c'est `f g` ; la trace donne `R`, et `R/2 − f` est constante.
+`Ric − κ T` s'annule sur le cône de lumière, donc c'est `f g` ; la trace donne R, et `R/2 − f` est constante.
 
 ### Étape 9 : le cube ouvert
 
-> **Proposition 9.1 (Physlib).** Parmi les six observables `H_k, X_k`, deux observables distinctes commutent si et seulement si elles sont sur des axes différents. Dans tout état, `(b_x b_y b_z)² ≤ det Σ` avec `b_k = ω⟨[H_k, X_k]⟩`. Dans l'état de courant maximal du cube : `det Σ = (C_x C_y C_z)² (b_x b_y b_z)²` ; dès `4 × 4 × 4`, `|det Ω| < det Σ` ; sur chaque axe, `⟨J_k⟩² / (4 Var H_k Var X_k) = 1/C_k²`. Dès `4 × 4 × 4`, `𝒱 = δ(Nx) δ(Ny) δ(Nz) > 0`.
+> **Proposition 9.1 (Physlib).** Parmi les six observables `H_k, X_k`, deux observables distinctes commutent si et seulement si elles sont sur des axes différents. Dans tout état, (b_x b_y b_z)² ≤ det Σ avec `b_k = ω⟨[H_k, X_k]⟩`. Dans l'état de courant maximal du cube : `det Σ = (C_x C_y C_z)² (b_x b_y b_z)²` ; dès `4 × 4 × 4`, `|det Ω| < det Σ` ; sur chaque axe, `⟨J_k⟩² / (4 Var H_k Var X_k) = 1/C_k²`. Dès `4 × 4 × 4`, `𝒱 = δ(Nx) δ(Ny) δ(Nz) > 0`.
 
 <div align="center">
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_etape9_cube.png"><img src="assets/claro/plaque_etape9_cube.png" alt="Axes distincts qui commutent, déterminant de Robertson 1934, quantum volumétrique, rapport de Mandelstam–Tamm" width="860"></picture>
@@ -233,10 +233,10 @@ Dans le code Lean l'accélération s'appelle `a` (`Rindler.time a`), sans lien a
 
 ### Étape 10 : les ponts avec l'équipe Physlib
 
-> **Théorème 10.1.** (i) Pour `G ≥ 0` et un déplacement `d ≠ 0`, l'accélération par paires de
+> **Théorème 10.1.** (i) Pour G ≥ 0 et un déplacement d ≠ 0, l'accélération par paires de
 > Qianli Ma vérifie `‖a‖ = G m/‖d‖²` ; en `r₀ = ‖d‖`, le champ faible de la source et le référentiel
 > d'accélération `‖a‖` ont la même pente de `g₀₀`. (ii) Si `r_s = 2GM`, `−(1 + 2Φ(r)) = −g_tt(r)`
-> pour tout `r`, avec `g_tt = 1 − r_s/r` (Philippe Kevorkian, signature `(+, −)`) ; en `r₀ ≠ 0`,
+> pour tout r, avec `g_tt = 1 − r_s/r` (Philippe Kevorkian, signature `(+, −)`) ; en r₀ ≠ 0,
 > `−g_tt` a la pente de `g₀₀` du référentiel d'accélération `r_s/(2r₀²)`. (iii) L'équation d'Einstein
 > de l'étape 8 vaut quand la relation de Clausius est demandée sur les vecteurs de type lumière de
 > Physlib.
@@ -348,7 +348,7 @@ de l'espace-temps et la dérivation de l'équation d'Einstein (T. Jacobson, *Phy
 | [`01 · nava-robertson-schrodinger`](https://github.com/naype888-cloud/nava-robertson-schrodinger) | Le canon : l'incertitude élémentaire dimensionnelle sur le cube ouvert, ℂᵈ ⊗ ℂᵈ ⊗ ℂᵈ |
 | [**02 · Proper-Time-General-Relativity**](https://github.com/naype888-cloud/Proper-Time-General-Relativity) | Le temps compte les pas : τ = 1/(φ\|t\|) à quatre sites ; masse effective, équivalence, gravitation *(ce dépôt)* |
 | [`03 · nrs3-mandelstam-tamm-cramer-rao`](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao) | Mandelstam–Tamm et Cramér–Rao : aucun état n'est orthogonal à lui-même avant πħ/(2ΔE) |
-| [`04 · YM-By-Perelmans-surgery-method`](https://github.com/naype888-cloud/YM-By-Perelmans-surgery-method) | Yang–Mills sur réseau : loi d'aire uniforme, matrice de transfert, défaut de fibre (0 sorry) |
+| [`04 · YM-By-Perelmans-surgery-method`](https://github.com/naype888-cloud/YM-By-Perelmans-surgery-method) | Yang–Mills sur réseau : loi d'aire uniforme, matrice de transfert, défaut de fibre (`0 sorry`) |
 | [`05 · nrs3-tightbinding`](https://github.com/naype888-cloud/nrs3-tightbinding) | La chaîne de Physlib, le cube ouvert et la table périodique (H–Og), un cube 3D par élément |
 | [`06 · nrs3-cristales`](https://github.com/naype888-cloud/nrs3-cristales) | Cristaux : la symétrie donne la forme de Σ et Ω, le spectre donne la taille |
 | [`07 · nrs3-completude`](https://github.com/naype888-cloud/nrs3-completude) | Complétude constructive et limites spectrales par Robertson–Fiedler–Niven–Szegő |
@@ -359,7 +359,7 @@ de l'espace-temps et la dérivation de l'équation d'Einstein (T. Jacobson, *Phy
 | [`12 · nrs3-penrose`](https://github.com/naype888-cloud/nrs3-penrose) | Effondrement gravitationnel de Diósi–Penrose : temps de décohérence par auto-énergie |
 | [`13 · nrs3-rovelli-lqg`](https://github.com/naype888-cloud/nrs3-rovelli-lqg) | Gravité quantique à boucles : spectre d'aire discrète, opérateur de surface et saturation de spin |
 | [`14 · nrs3-uncertainty-cone`](https://github.com/naype888-cloud/nrs3-uncertainty-cone) | Cône de lumière futur et cercle de Minkowski : structure causale sous revêtement SL(2, ℂ) |
-| [`15 · lean4-commits`](https://github.com/naype888-cloud/lean4-commits) | 53 PRs fusionnées dans leanprover-community/physlib : catalogue de preuves formelles, 0 sorry, ZFC |
+| [`15 · lean4-commits`](https://github.com/naype888-cloud/lean4-commits) | 53 PRs fusionnées dans leanprover-community/physlib : catalogue de preuves formelles, `0 sorry`, ZFC |
 
 ---
 
@@ -386,7 +386,7 @@ lake env lean Verification/Axioms.lean
 # 'ProperTimeGR.properTime_generalRelativity' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
 
-0 sorry, aucun axiome ad hoc, `autoImplicit = false`.
+`0 sorry`, aucun axiome ad hoc, `autoImplicit = false`.
 ---
 
 ## Licence
