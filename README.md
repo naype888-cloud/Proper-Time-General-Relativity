@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/titre_temps_propre.png"><img src="assets/claro/titre_temps_propre.png" alt="Du temps propre et de ses conséquences générales, relatives à l’observateur" width="860"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/titre_temps_propre.png"><img src="assets/claro/titre_temps_propre.png" alt="Du temps propre relativiste, et de ses conséquences générales" width="860"></picture>
 **"Du temps propre relativiste et de ses conséquences générales"**
 
 ### Sur la chaîne à liaisons fortes de Physlib (de pas `a`), le facteur `a` s'élimine : un pas dure `1 / (2|t| cos(π/(N+1)))`, `n` pas durent `n` fois plus longtemps, et sans pas il n'y a pas de temps
