@@ -5,10 +5,10 @@
 <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/titre_temps_propre.png"><img src="assets/claro/titre_temps_propre.png" alt="Du temps propre et de ses conséquences générales, relatives à l’observateur" width="860"></picture>
 **"Du temps propre et de ses conséquences générales, relatives à l’observateur"**
 
-### Sur la chaîne de tight binding de Physlib, l'espacement `a` se simplifie : un pas dure `1 / (2|t| cos(π/(N+1)))`, `n` pas durent `n` fois plus, et sans pas il n'y a pas de temps
+### Sur la chaîne à liaisons fortes de Physlib (de pas `a`), le facteur `a` s'élimine : un pas dure `1 / (2|t| cos(π/(N+1)))`, `n` pas durent `n` fois plus longtemps, et sans pas il n'y a pas de temps
 
 **Eduardo Nava Hernández · José Arturo Nava Hernández**  
-*Dépôt 30 · vérification formelle en Lean 4 · 0 sorry · sur Physlib*
+*Dépôt 30 · vérification formelle en Lean 4 · `0 sorry` · sur Physlib*
 
 [![Lean 4](https://img.shields.io/badge/Lean_4-v4.35.0-blue.svg?style=flat-square)](https://leanprover.github.io/)
 [![Mathlib](https://img.shields.io/badge/Mathlib-v%C3%A9rifi%C3%A9-2ea44f.svg?style=flat-square)](https://github.com/leanprover-community/mathlib4)
@@ -25,18 +25,18 @@
 > chaîne ouverte, la position est `X = Σ a n |n⟩⟨n|` et le hamiltonien est le saut du graphe
 > chemin, `H = E₀ I − t A(P_N)` (Physlib #2096). L'espacement `a` n'entre que par `X`, donc le
 > courant porte un facteur `a` et aucun état ne dépasse `maxCurrent = 2|a t| cos(π/(N+1))`. Un pas,
-> un espacement à la vitesse limite, dure donc un temps où `a` se simplifie.
+> un espacement à la vitesse limite, dure donc un temps où `a` s'élimine.
 >
 > <div align="center">
 > <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_pas.png"><img src="assets/claro/plaque_pas.png" alt="Le temps d'un pas : a sur maxCurrent, où a se simplifie" width="860"></picture>
 > </div>
 >
-> **1 · `a` se simplifie** : `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))`, le même pour tout espacement ; à quatre sites, `τ_pas = 1/(φ|t|)`, `φ = (1 + √5)/2`.
+> **1 · `a` s'élimine** : `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))`, le même pour tout espacement ; à quatre sites, `τ_pas = 1/(φ|t|)`, `φ = (1 + √5)/2`.
 > **2 · Le temps compte les pas** : `n` pas durent `n · τ_pas` ; aucun état ne parcourt `n` espacements plus vite ; l'état de courant maximal les parcourt exactement en ce temps.
 > **3 · Sans pas, pas de temps** : `n · τ_pas = 0 ⟺ n = 0`.
 > **4 · Lumière ou masse** : l'état de courant maximal sature Robertson–Schrödinger exactement en `N = 2, 3` ; dès `N = 4` son rapport d'incertitude vérifie `1 < C < √(π²/3 − 2)`, et `C → √(π²/3 − 2)` quand `N → ∞` ; en `N = 4`, `C² = (99 − 42√5)/5`, et pour tout `N ≥ 4`, `C² ∈ [(99 − 42√5)/5, π²/3 − 2)`.
 > **5 · Niven** : dès `N = 3`, `cos(π/(N+1))` est irrationnel, donc le pas n'est jamais une fraction rationnelle de `1/|t|`.
-> **6 · Masse effective** : la masse effective de la bande, `m* = 1/E''(0) = 1/(2 t a²)`, a une énergie au repos `m* c² = 2 t cos²(π/(N+1))` où `a` se simplifie encore ; `α_G = G m*²/c > 0`.
+> **6 · Masse effective** : la masse effective de la bande, `m* = 1/E''(0) = 1/(2 t a²)`, a une énergie au repos `m* c² = 2 t cos²(π/(N+1))` où `a` s'élimine encore ; `α_G = G m*²/c > 0`.
 > **7 · Équivalence et `g₀₀`** : dans le référentiel accéléré, `g₀₀ = −(1 + αξ)² = −(1 + 2Φ) − Φ²` avec `Φ = αξ`, et une horloge statique bat à `1 + αξ` ; le champ faible de `Φ = −GM/r` a, en `r₀`, la même pente de `g₀₀` que le référentiel d'accélération `GM/r₀²`.
 > **8 · Einstein** : l'horloge accélérée fixe la température `α/2π`, et la relation de Clausius sur chaque nappe de lumière, avec `η = 1/(4ℓ²)`, donne `Ric − ½ R g + Λ g = 8π ℓ² T`.
 > **9 · Le cube ouvert** : sur le produit de trois chaînes, deux observables distinctes parmi `H_k, X_k` commutent si et seulement si elles sont sur des axes différents ; dès `4 × 4 × 4`, le quantum volumétrique est strictement positif (`𝒱 > 0`) et, dans l'état de courant maximal, Robertson 1934 est strict pour les six observables (`|det Ω| < det Σ`) ; dans cet état, le rapport de Mandelstam–Tamm vaut `1/C²` sur chaque axe. Le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein sont réunis dans `unified_properTime_generalRelativity`.
@@ -302,38 +302,38 @@ Liste complète tirée de l'en-tête `Authors` de chaque fichier de Physlib impo
 
 | Module | Déclaration | Signification | Statut |
 |---|---|---|---|
-| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `stepTime_eq` | `a / maxCurrent = 1 / (2\|t\| cos(π/(N+1)))` | 0 sorry |
-| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `stepTime_of_N_eq_four` | `τ_pas = 1/(φ\|t\|)` à quatre sites | 0 sorry |
-| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `elapsed_eq_zero_iff` | sans pas, pas de temps | 0 sorry |
-| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `elapsed_le_travelTime` | aucun état plus rapide que les pas | 0 sorry |
-| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `timeCountsSteps` | le temps compte les pas ; lumière ou masse | 0 sorry |
-| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `tendsto_uncertaintyRatio_longChain` | `C → √(π²/3 − 2)` quand `N → ∞` | 0 sorry |
-| [`FourSites.lean`](src/ProperTimeGeneralRelativity/FourSites.lean) | `uncertaintyRatio_sq_of_N_eq_four` | `C² = (99 − 42√5)/5` en `N = 4` | 0 sorry |
-| [`FourSites.lean`](src/ProperTimeGeneralRelativity/FourSites.lean) | `uncertaintyRatio_sq_mem_Ico` | `C² ∈ [(99 − 42√5)/5, π²/3 − 2)` pour `N ≥ 4` | 0 sorry |
-| [`Niven.lean`](src/ProperTimeGeneralRelativity/Niven.lean) | `stepTime_irrational` | `2\|t\| τ_pas ∉ ℚ` dès `N = 3` | 0 sorry |
-| [`Mass.lean`](src/ProperTimeGeneralRelativity/Mass.lean) | `effMass_mul_maxCurrent_sq` | `m* c² = 2 t cos²(π/(N+1))`, sans `a` | 0 sorry |
-| [`Mass.lean`](src/ProperTimeGeneralRelativity/Mass.lean) | `gravitationalCoupling_pos` | `α_G = G m*²/c > 0` | 0 sorry |
-| [`Equivalence.lean`](src/ProperTimeGeneralRelativity/Equivalence.lean) | `metric` | `−(1 + αξ)² dη² + dξ²` | 0 sorry |
-| [`Equivalence.lean`](src/ProperTimeGeneralRelativity/Equivalence.lean) | `equivalence` | champ faible de `M` = référentiel accéléré au premier ordre | 0 sorry |
-| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `axes_commute` | commutation des observables entre axes distincts | 0 sorry |
-| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `pairs_commute_iff` | deux des six observables commutent ⟺ axes différents | 0 sorry |
-| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `robertson_det` | `(b_x b_y b_z)² ≤ det Σ` dans tout état | 0 sorry |
-| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `det_cov_maxCurrentCubeState` | `det Σ = (C_x C_y C_z)² (b_x b_y b_z)²` au courant maximal | 0 sorry |
-| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `robertson_det_strict` | `\|det Ω\| < det Σ` au courant maximal dès `4 × 4 × 4` | 0 sorry |
-| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `volQuantum_pos` | quantum volumétrique `𝒱 > 0` | 0 sorry |
-| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `mandelstamTamm_efficiency` | rapport de Mandelstam–Tamm `1/C_k²` sur chaque axe | 0 sorry |
-| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `massAndEquivalence` | Niven, masse, `α_G`, équivalence | 0 sorry |
-| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `openCube` | commutation, `𝒱 > 0`, Robertson strict, Mandelstam–Tamm sur les trois axes | 0 sorry |
-| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `unified_properTime_generalRelativity` | le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein réunis | 0 sorry |
-| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `acceleratedClock` | temps propre relativiste, période `2π/α`, `T = α/2π` | 0 sorry |
-| [`EinsteinEquation.lean`](src/ProperTimeGeneralRelativity/Gravity/EinsteinEquation.lean) | `einstein_equation` | Clausius partout donne Einstein | 0 sorry |
-| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `einstein_eightPi` | Einstein avec couplage `8π ℓ²` | 0 sorry |
-| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `properTime_generalRelativity` | le pas, Unruh et Einstein réunis | 0 sorry |
-| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `einstein_eightPi_lightLike` | Einstein sur les vecteurs de type lumière de Physlib | 0 sorry |
-| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `norm_pairGravityAcceleration` | `‖a‖ = G m/‖d‖²` (Qianli Ma) | 0 sorry |
-| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `equivalence_pairGravity` | référentiel accéléré de `‖a‖` = champ faible au premier ordre | 0 sorry |
-| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `weakField_eq_neg_gttOut` | `−(1 + 2Φ) = −g_tt` si `r_s = 2GM` (Philippe Kevorkian) | 0 sorry |
-| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `equivalence_gttOut` | `−g_tt` = référentiel d'accélération `r_s/(2r₀²)` au premier ordre | 0 sorry |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `stepTime_eq` | `a / maxCurrent = 1 / (2\|t\| cos(π/(N+1)))` | `0 sorry` |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `stepTime_of_N_eq_four` | `τ_pas = 1/(φ\|t\|)` à quatre sites | `0 sorry` |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `elapsed_eq_zero_iff` | sans pas, pas de temps | `0 sorry` |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `elapsed_le_travelTime` | aucun état plus rapide que les pas | `0 sorry` |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `timeCountsSteps` | le temps compte les pas ; lumière ou masse | `0 sorry` |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `tendsto_uncertaintyRatio_longChain` | `C → √(π²/3 − 2)` quand `N → ∞` | `0 sorry` |
+| [`FourSites.lean`](src/ProperTimeGeneralRelativity/FourSites.lean) | `uncertaintyRatio_sq_of_N_eq_four` | `C² = (99 − 42√5)/5` en `N = 4` | `0 sorry` |
+| [`FourSites.lean`](src/ProperTimeGeneralRelativity/FourSites.lean) | `uncertaintyRatio_sq_mem_Ico` | `C² ∈ [(99 − 42√5)/5, π²/3 − 2)` pour `N ≥ 4` | `0 sorry` |
+| [`Niven.lean`](src/ProperTimeGeneralRelativity/Niven.lean) | `stepTime_irrational` | `2\|t\| τ_pas ∉ ℚ` dès `N = 3` | `0 sorry` |
+| [`Mass.lean`](src/ProperTimeGeneralRelativity/Mass.lean) | `effMass_mul_maxCurrent_sq` | `m* c² = 2 t cos²(π/(N+1))`, sans `a` | `0 sorry` |
+| [`Mass.lean`](src/ProperTimeGeneralRelativity/Mass.lean) | `gravitationalCoupling_pos` | `α_G = G m*²/c > 0` | `0 sorry` |
+| [`Equivalence.lean`](src/ProperTimeGeneralRelativity/Equivalence.lean) | `metric` | `−(1 + αξ)² dη² + dξ²` | `0 sorry` |
+| [`Equivalence.lean`](src/ProperTimeGeneralRelativity/Equivalence.lean) | `equivalence` | champ faible de `M` = référentiel accéléré au premier ordre | `0 sorry` |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `axes_commute` | commutation des observables entre axes distincts | `0 sorry` |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `pairs_commute_iff` | deux des six observables commutent ⟺ axes différents | `0 sorry` |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `robertson_det` | `(b_x b_y b_z)² ≤ det Σ` dans tout état | `0 sorry` |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `det_cov_maxCurrentCubeState` | `det Σ = (C_x C_y C_z)² (b_x b_y b_z)²` au courant maximal | `0 sorry` |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `robertson_det_strict` | `\|det Ω\| < det Σ` au courant maximal dès `4 × 4 × 4` | `0 sorry` |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `volQuantum_pos` | quantum volumétrique `𝒱 > 0` | `0 sorry` |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `mandelstamTamm_efficiency` | rapport de Mandelstam–Tamm `1/C_k²` sur chaque axe | `0 sorry` |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `massAndEquivalence` | Niven, masse, `α_G`, équivalence | `0 sorry` |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `openCube` | commutation, `𝒱 > 0`, Robertson strict, Mandelstam–Tamm sur les trois axes | `0 sorry` |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `unified_properTime_generalRelativity` | le pas, `m* c²`, le cube, l'équivalence, Unruh et Einstein réunis | `0 sorry` |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `acceleratedClock` | temps propre relativiste, période `2π/α`, `T = α/2π` | `0 sorry` |
+| [`EinsteinEquation.lean`](src/ProperTimeGeneralRelativity/Gravity/EinsteinEquation.lean) | `einstein_equation` | Clausius partout donne Einstein | `0 sorry` |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `einstein_eightPi` | Einstein avec couplage `8π ℓ²` | `0 sorry` |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `properTime_generalRelativity` | le pas, Unruh et Einstein réunis | `0 sorry` |
+| [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `einstein_eightPi_lightLike` | Einstein sur les vecteurs de type lumière de Physlib | `0 sorry` |
+| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `norm_pairGravityAcceleration` | `‖a‖ = G m/‖d‖²` (Qianli Ma) | `0 sorry` |
+| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `equivalence_pairGravity` | référentiel accéléré de `‖a‖` = champ faible au premier ordre | `0 sorry` |
+| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `weakField_eq_neg_gttOut` | `−(1 + 2Φ) = −g_tt` si `r_s = 2GM` (Philippe Kevorkian) | `0 sorry` |
+| [`Bridges.lean`](src/ProperTimeGeneralRelativity/Bridges.lean) | `equivalence_gttOut` | `−g_tt` = référentiel d'accélération `r_s/(2r₀²)` au premier ordre | `0 sorry` |
 
 `Unruh.lean`, `Clausius.lean`, `NullForms.lean` et `EinsteinEquation.lean` formalisent la thermodynamique
 de l'espace-temps et la dérivation de l'équation d'Einstein (T. Jacobson, *Phys. Rev. Lett.* 75, 1995, 1260).
