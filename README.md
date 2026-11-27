@@ -257,13 +257,13 @@ L'hypothèse `r_s = 2GM` est posée, pas déduite : la structure de Physlib ne c
 | PR | Énoncé | Étape |
 |---|---|---|
 | [#2096](https://github.com/leanprover-community/physlib/pull/2096) | la chaîne ouverte est le saut du graphe chemin : `H = E₀ I − t A(P_N)` | 1 |
-| [#1724](https://github.com/leanprover-community/physlib/pull/1724) | limite de vitesse : `|⟨J⟩_ω| ≤ maxCurrent`, atteinte par l'état de courant maximal | 1, 2 |
+| [#1724](https://github.com/leanprover-community/physlib/pull/1724) | limite de vitesse : `\|⟨J⟩_ω\| ≤ maxCurrent`, atteinte par l'état de courant maximal | 1, 2 |
 | [#1718](https://github.com/leanprover-community/physlib/pull/1718) | l'état de courant maximal sature Robertson–Schrödinger exactement en `N = 2, 3` | 4 |
 | [#1723](https://github.com/leanprover-community/physlib/pull/1723) | `1 < C` dès `N = 4` | 4 |
 | [#1735](https://github.com/leanprover-community/physlib/pull/1735) | `C` strictement croissant dès quatre sites, `C < √(π²/3 − 2)` | 4 |
 | [#1734](https://github.com/leanprover-community/physlib/pull/1734) | `C → √(π²/3 − 2)` pour les longues chaînes | 4 |
 | [#1725](https://github.com/leanprover-community/physlib/pull/1725) | le cube ouvert : les observables d'axes différents commutent | 9 |
-| [#1730](https://github.com/leanprover-community/physlib/pull/1730) | Robertson 1934 pour plusieurs observables : `|det Ω| ≤ det Σ` | 9 |
+| [#1730](https://github.com/leanprover-community/physlib/pull/1730) | Robertson 1934 pour plusieurs observables : `\|det Ω\| ≤ det Σ` | 9 |
 | [#1742](https://github.com/leanprover-community/physlib/pull/1742) | Robertson 1934 sur le cube ; `det Σ` au courant maximal ; strict dès `4 × 4 × 4` | 9 |
 | [#1756](https://github.com/leanprover-community/physlib/pull/1756) | le quantum volumétrique `𝒱 = δ(Nx) δ(Ny) δ(Nz)`, positif dès `4 × 4 × 4` | 9 |
 | [#1739](https://github.com/leanprover-community/physlib/pull/1739) | Mandelstam–Tamm au courant maximal : rapport `1/C²`, sur chaque axe du cube | 9 |
@@ -300,15 +300,15 @@ Liste complète tirée de l'en-tête `Authors` de chaque fichier de Physlib impo
 
 | Module | Déclaration | Signification | Statut |
 |---|---|---|---|
-| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `stepTime_eq` | `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))` | 0 sorry |
-| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `stepTime_of_N_eq_four` | `τ_pas = 1/(φ|t|)` à quatre sites | 0 sorry |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `stepTime_eq` | `a / maxCurrent = 1 / (2\|t\| cos(π/(N+1)))` | 0 sorry |
+| [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `stepTime_of_N_eq_four` | `τ_pas = 1/(φ\|t\|)` à quatre sites | 0 sorry |
 | [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `elapsed_eq_zero_iff` | sans pas, pas de temps | 0 sorry |
 | [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `elapsed_le_travelTime` | aucun état plus rapide que les pas | 0 sorry |
 | [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `timeCountsSteps` | le temps compte les pas ; lumière ou masse | 0 sorry |
 | [`StepTime.lean`](src/ProperTimeGeneralRelativity/StepTime.lean) | `tendsto_uncertaintyRatio_longChain` | `C → √(π²/3 − 2)` quand `N → ∞` | 0 sorry |
 | [`FourSites.lean`](src/ProperTimeGeneralRelativity/FourSites.lean) | `uncertaintyRatio_sq_of_N_eq_four` | `C² = (99 − 42√5)/5` en `N = 4` | 0 sorry |
 | [`FourSites.lean`](src/ProperTimeGeneralRelativity/FourSites.lean) | `uncertaintyRatio_sq_mem_Ico` | `C² ∈ [(99 − 42√5)/5, π²/3 − 2)` pour `N ≥ 4` | 0 sorry |
-| [`Niven.lean`](src/ProperTimeGeneralRelativity/Niven.lean) | `stepTime_irrational` | `2|t| τ_pas ∉ ℚ` dès `N = 3` | 0 sorry |
+| [`Niven.lean`](src/ProperTimeGeneralRelativity/Niven.lean) | `stepTime_irrational` | `2\|t\| τ_pas ∉ ℚ` dès `N = 3` | 0 sorry |
 | [`Mass.lean`](src/ProperTimeGeneralRelativity/Mass.lean) | `effMass_mul_maxCurrent_sq` | `m* c² = 2 t cos²(π/(N+1))`, sans `a` | 0 sorry |
 | [`Mass.lean`](src/ProperTimeGeneralRelativity/Mass.lean) | `gravitationalCoupling_pos` | `α_G = G m*²/c > 0` | 0 sorry |
 | [`Equivalence.lean`](src/ProperTimeGeneralRelativity/Equivalence.lean) | `metric` | `−(1 + αξ)² dη² + dξ²` | 0 sorry |
@@ -317,7 +317,7 @@ Liste complète tirée de l'en-tête `Authors` de chaque fichier de Physlib impo
 | [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `pairs_commute_iff` | deux des six observables commutent ⟺ axes différents | 0 sorry |
 | [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `robertson_det` | `(b_x b_y b_z)² ≤ det Σ` dans tout état | 0 sorry |
 | [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `det_cov_maxCurrentCubeState` | `det Σ = (C_x C_y C_z)² (b_x b_y b_z)²` au courant maximal | 0 sorry |
-| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `robertson_det_strict` | `|det Ω| < det Σ` au courant maximal dès `4 × 4 × 4` | 0 sorry |
+| [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `robertson_det_strict` | `\|det Ω\| < det Σ` au courant maximal dès `4 × 4 × 4` | 0 sorry |
 | [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `volQuantum_pos` | quantum volumétrique `𝒱 > 0` | 0 sorry |
 | [`Cube.lean`](src/ProperTimeGeneralRelativity/Cube.lean) | `mandelstamTamm_efficiency` | rapport de Mandelstam–Tamm `1/C_k²` sur chaque axe | 0 sorry |
 | [`ProperTimeGeneralRelativity.lean`](src/ProperTimeGeneralRelativity.lean) | `massAndEquivalence` | Niven, masse, `α_G`, équivalence | 0 sorry |
@@ -344,7 +344,7 @@ de l'espace-temps et la dérivation de l'équation d'Einstein (T. Jacobson, *Phy
 |:---|:---|
 | [`00 · bacqm-substrate`](https://github.com/naype888-cloud/bacqm-systems) | Substrat matériel & moteur du noyau Linux : modules de mémoire dynamiques en temps réel |
 | [`01 · nava-robertson-schrodinger`](https://github.com/naype888-cloud/nava-robertson-schrodinger) | Le canon : l'incertitude élémentaire dimensionnelle sur le cube ouvert, ℂᵈ ⊗ ℂᵈ ⊗ ℂᵈ |
-| [**02 · Proper-Time-General-Relativity**](https://github.com/naype888-cloud/Proper-Time-General-Relativity) | Le temps compte les pas : τ = 1/(φ|t|) à quatre sites ; masse effective, équivalence, gravitation *(ce dépôt)* |
+| [**02 · Proper-Time-General-Relativity**](https://github.com/naype888-cloud/Proper-Time-General-Relativity) | Le temps compte les pas : τ = 1/(φ\|t\|) à quatre sites ; masse effective, équivalence, gravitation *(ce dépôt)* |
 | [`03 · nrs3-mandelstam-tamm-cramer-rao`](https://github.com/naype888-cloud/nrs3-mandelstam-tamm-cramer-rao) | Mandelstam–Tamm et Cramér–Rao : aucun état n'est orthogonal à lui-même avant πħ/(2ΔE) |
 | [`04 · YM-By-Perelmans-surgery-method`](https://github.com/naype888-cloud/YM-By-Perelmans-surgery-method) | Yang–Mills sur réseau : loi d'aire uniforme, matrice de transfert, défaut de fibre (0 sorry) |
 | [`05 · nrs3-tightbinding`](https://github.com/naype888-cloud/nrs3-tightbinding) | La chaîne de Physlib, le cube ouvert et la table périodique (H–Og), un cube 3D par élément |
