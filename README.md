@@ -28,7 +28,7 @@
 > un espacement à la vitesse limite, dure donc un temps où `a` s'élimine.
 >
 > <div align="center">
-> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_pas.png"><img src="assets/claro/plaque_pas.png" alt="Le temps d'un pas : a sur maxCurrent, où a se simplifie" width="860"></picture>
+> <picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/plaque_pas.png"><img src="assets/claro/plaque_pas.png" alt="Le temps d'un pas : a sur maxCurrent, où a s'élimine" width="860"></picture>
 > </div>
 >
 > **1 · `a` s'élimine** : `a / maxCurrent = 1 / (2|t| cos(π/(N+1)))`, le même pour tout espacement ; à quatre sites, `τ_pas = 1/(φ|t|)`, `φ = (1 + √5)/2`.
@@ -51,7 +51,7 @@
 ## Résumé formel
 
 **Le pas.** `stepTime T = a / maxCurrent`, et `stepTime_eq` : il vaut `1 / (2|t| cos(π/(N+1)))`.
-Deux chaînes de même `N` et même `t` ont le même pas, quel que soit leur espacement
+Deux chaînes avec le même `N` et le même `t` ont le même pas, quel que soit leur espacement
 (`stepTime_eq_of_eq`) ; il est strictement positif pour `t ≠ 0`, `N ≥ 2` (`stepTime_pos`). À quatre sites, `cos(π/5) = φ/2` et
 `τ_pas = 1/(φ|t|)` (`stepTime_of_N_eq_four`).
 
@@ -128,7 +128,7 @@ demandé sur les vecteurs `k` de caractère causal « lumière » (`einstein_eig
 *Modules formels :* Physlib `PhyslibAlpha/CondensedMatter/TightBindingChain` : `Open/Basic.lean` (#2096) et `Current/SpeedLimit.lean` (#1724).  
 `maxCurrent` est la plus grande valeur propre du courant `J` : la borne est exacte, atteinte par l'état de courant maximal.
 
-### Étape 2 : `a` se simplifie, le temps compte les pas
+### Étape 2 : `a` s'élimine, le temps compte les pas
 
 > **Théorème 2.1.** `τ_pas = a / maxCurrent = 1 / (2|t| cos(π/(N+1)))` ; `t_n = n τ_pas` ;
 > `t_n ≤ n a / |⟨J⟩_ω|` pour tout état de courant non nul ; égalité pour l'état de courant maximal ; `t_n = 0 ⟺ n = 0`.
@@ -168,7 +168,7 @@ Niven (Mathlib) : en `0 ≤ r ≤ 1`, `cos(rπ) ∈ ℚ` force `r ∈ {0, 1/3, 1
 *Module formel du cadre :* [`FourSites.lean`](src/ProperTimeGeneralRelativity/FourSites.lean) (`uncertaintyRatioSqForm_five`, `uncertaintyRatio_sq_of_N_eq_four`, `uncertaintyRatio_sq_mem_Ico`).  
 La forme close de `C²` en `n = 5` avec `cos(π/5) = (1 + √5)/4`, puis la monotonie (#1735) et la borne de Szegő (#1734).
 
-### Étape 5 : la masse effective ; `a` se simplifie dans `m* c²`
+### Étape 5 : la masse effective ; `a` s'élimine dans `m* c²`
 
 > **Théorème 5.1.** `E''(0) = 2 t a²`, `m* = 1/(2 t a²)` ; avec `c = maxCurrent`,
 > `m* c² = 2 t cos²(π/(N+1))`, `m* c² τ_pas = cos(π/(N+1))`, et `α_G = G m*²/c > 0` (`ħ = 1`).
@@ -397,7 +397,7 @@ NRS Noncommercial License 1.0.0, voir [`LICENSE`](LICENSE).
 
 <div align="center">
 
-### 📐 *« L'espacement se simplifie ; il reste les pas, et sans pas il n'y a pas de temps. »*
+### 📐 *« L'espacement s'élimine ; il reste les pas, et sans pas il n'y a pas de temps. »*
 
 **Eduardo Nava Hernández · José Arturo Nava Hernández** · [naype888-cloud](https://github.com/naype888-cloud)
 
