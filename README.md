@@ -2,7 +2,9 @@
 
 <div align="center">
 
-# Le temps compte les pas
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/oscuro/titre_temps_propre.png"><img src="assets/claro/titre_temps_propre.png" alt="Du temps propre et de ses conséquences générales, relatives à l’observateur" width="860"></picture>
+**"Du temps propre et de ses conséquences générales, relatives à l’observateur"**
+
 ### Sur la chaîne de tight binding de Physlib, l'espacement `a` se simplifie : un pas dure `1 / (2|t| cos(π/(N+1)))`, `n` pas durent `n` fois plus, et sans pas il n'y a pas de temps
 
 **Eduardo Nava Hernández · José Arturo Nava Hernández**  
